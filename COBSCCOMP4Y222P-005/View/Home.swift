@@ -8,63 +8,142 @@
 import SwiftUI
 
 struct Home: View {
+    
+    @State private var searchText = ""
+    
     var body: some View {
-        ScrollView{
-            VStack(alignment: .leading, spacing: 20){
-                
-                HStack{
-                    Text("Welcome Ann!")
-                        .font(.title)
-                        .padding(.top, 20)
+        
+        VStack{
+            ScrollView{
+                VStack(alignment: .leading, spacing: 20){
+                    
+                    HStack{
+                        Text("Welcome Ann!")
+                            .font(.title)
+                            .padding(.top, 20)
+                            .padding(.horizontal)
+                        
+                        Spacer()
+                    }
+                    
+                    SearchBar(text: $searchText)
+                        .padding()
+                    
+                    OfferBanner()
                         .padding(.horizontal)
                     
-                  Spacer()
+                    CategoriesSection()
+                        .padding(.horizontal)
+                    
+                    PopularProductsSection()
+                        .padding(.horizontal)
+                    
+                    Spacer()
+                    
+                    
                 }
-                
-                OfferBanner()
-                    .padding(.horizontal)
-                
-                CategoriesSection()
-                    .padding(.horizontal)
-                
-                PopularProductsSection()
-                   .padding(.horizontal)
-                
-                Spacer()
-                
-                
             }
+            .navigationBarTitle("Home", displayMode: .inline)
+            
+            MenuBar()
         }
-        .navigationBarTitle("Home", displayMode: .inline)
     }
 }
+
+struct MenuBar: View {
+    var body: some View {
+        HStack {
+            Spacer()
+            
+            MenuButton(imageName: "house.fill", text: "Home")
+            
+            Spacer()
+            
+            MenuButton(imageName: "heart.fill", text: "Favorites")
+            
+            Spacer()
+            
+            MenuButton(imageName: "cart.fill", text: "Cart")
+            
+            Spacer()
+            
+            MenuButton(imageName: "person.fill", text: "Profile")
+            
+            Spacer()
+        }
+        .padding(.vertical, 10)
+        .background(Color.white)
+        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
+    }
+}
+
+
+struct MenuButton: View {
+    var imageName: String
+    var text: String
+    
+    var body: some View {
+        VStack {
+            Image(systemName: imageName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 25, height: 25)
+            
+            Text(text)
+                .font(.caption)
+                .foregroundColor(.primary)
+        }
+    }
+}
+
+
 
 struct OfferBanner: View{
     var body: some View {
         VStack{
             HStack{
-                Text("Offer valid until 25th december 2023")
-                    .font(.headline)
-                    .foregroundColor(Color.white)
-                    .padding()
-                // .background(Color.yellow)
-                //.cornerRadius(10)
-                Spacer()
+                VStack{
+                    Text("Offer valid until")
+                        .font(.headline)
+                        .foregroundColor(Color.white)
+                        .padding(.leading, 10.0)
+                       
+                     
+                    Text("25th december 2023")
+                        .font(.headline)
+                        .foregroundColor(Color.white)
+                        .padding(.leading, 10.0)
+                       
+                      
+                }
+               // Spacer()
+                
+                Image("Bannerpagegirl") // Replace "offer_image" with your image name
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .padding()
+                                    .frame(width: 120, height: 120)
+                                   // .padding()
             }
             
             NavigationLink(destination: OfferPage()){
                 Text("Learn More")
                     .foregroundColor(.white)
+                   // .padding()
                     .padding()
+                    .frame(width: 100.0, height: 50.0)
                     .background(Color.blue)
                     .cornerRadius(10)
             }
+            //.frame(width: 100.0, height: 100.0)
+            .padding(.bottom, -30.0)
             
             
         }
         .frame(width: 350, height : 150)
         .background(Color(hue: 0.601, saturation: 0.818, brightness: 0.775))
         .cornerRadius(10)
+    
     }
 }
 
@@ -82,11 +161,13 @@ struct CategoriesSection : View {
                 
             ScrollView(.horizontal, showsIndicators: false){
                 HStack(spacing: 10) {
-                    CategoryBox(imageName: "Homepage", categoryName: "Men", destination: AnyView(OfferPage()))
+                    CategoryBox(imageName: "Man", categoryName: "Men", destination: AnyView(OfferPage()))
                     
-                    CategoryBox(imageName: "Homepage", categoryName: "Women", destination: AnyView(OfferPage()))
+                    CategoryBox(imageName: "Woman", categoryName: "Women", destination: AnyView(OfferPage()))
                     
-                    CategoryBox(imageName: "Homepage", categoryName: "Men", destination: AnyView(OfferPage()))
+                    CategoryBox(imageName: "Kids", categoryName: "Men", destination: AnyView(OfferPage()))
+                    
+                    CategoryBox(imageName: "Kids", categoryName: "Men", destination: AnyView(OfferPage()))
 
                 }
                 .padding()
@@ -135,18 +216,107 @@ struct CategoryBox : View {
 struct PopularProductsSection: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10){
-            Text("Most Popular Products")
-                .font(.headline)
+            HStack{
+                //Spacer()
+                Text("Popular Products")
+                    .font(.headline)
+                    .padding(.top, 150.0)
+                
+                Spacer()
+            }
+                
+            ScrollView(.horizontal, showsIndicators: false){
+                
+                VStack{
+                    HStack(spacing: 10) {
+                        PopularProductsBox(imageName: "Man", categoryName: "Men", destination: AnyView(OfferPage()))
+                        
+                        Spacer()
+                        
+                        PopularProductsBox(imageName: "Woman", categoryName: "Women", destination: AnyView(OfferPage()))
+                        
+                        
+                        
+                    }
+                    .padding()
+                    
+                    HStack(spacing: 10) {
+                        PopularProductsBox(imageName: "Man", categoryName: "Men", destination: AnyView(OfferPage()))
+                        
+                        Spacer()
+                        
+                        PopularProductsBox(imageName: "Woman", categoryName: "Women", destination: AnyView(OfferPage()))
+                        
+                        
+                        
+                    }
+                    .padding()
+                }
+                
+            }
             
-            Text("Product 1")
-            Text("Product 2")
-            Text("Product 3")
+            
+            
         }
+        .frame(width: 350, height : 300)
         .padding()
         .background(Color.gray.opacity(0.1))
         .cornerRadius(10)
     }
 }
+
+struct PopularProductsBox : View {
+    var imageName: String
+    var categoryName: String
+    var destination: AnyView
+    
+    
+    var body: some View {
+        NavigationLink(destination: destination){
+            VStack {
+                Image(imageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 50, height: 50)
+                
+                Text(categoryName)
+                    .font(.headline)
+                    .foregroundColor(.primary)
+                    .multilineTextAlignment(.center)
+            }
+            .padding()
+            .frame(width: 150,height:170)
+            .background(Color.white)
+                       .cornerRadius(10)
+                       .shadow(radius: 5)
+        }
+    }
+}
+
+struct SearchBar: View {
+    @Binding var text: String
+    
+    var body: some View {
+        HStack {
+            TextField("Search", text: $text)
+                .padding(8)
+                .background(Color(.systemGray6))
+                .cornerRadius(10)
+            
+            Button(action: {
+                // Perform search action here
+            }) {
+                Image(systemName: "magnifyingglass")
+                    .foregroundColor(.gray)
+                    .padding(.horizontal, 0)
+            }
+        }
+        .padding(.horizontal)
+        .background(Color(.systemGray5))
+        .cornerRadius(10)
+    }
+}
+
 #Preview {
     Home()
 }

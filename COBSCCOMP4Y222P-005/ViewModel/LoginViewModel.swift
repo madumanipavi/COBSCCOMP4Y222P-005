@@ -6,3 +6,36 @@
 //
 
 import Foundation
+
+
+class LoginViewModel  : ObservableObject {
+    
+    @Published var username = ""
+    @Published var password = ""
+    @Published var errorMessage = ""
+    
+ //   func signIn(completion: @escaping (Bool) -> Void) {
+   //     Auth.auth().signIn(withEmail: username, password: password) { (authResult, error) in
+     //       if let error = error {
+       //         self.errorMessage = error.localizedDescription
+         //       completion(false)
+           //     return
+            //}
+            //completion(true)
+        //}
+    //}
+    
+    func validate() -> Bool {
+        guard !username.isEmpty else {
+            errorMessage = "Please enter a username."
+            return false
+        }
+        
+        guard !password.isEmpty else {
+            errorMessage = "Please enter a password."
+            return false
+        }
+        
+        return true
+    }
+}

@@ -9,8 +9,13 @@ import SwiftUI
 
 struct Login: View {
     
-    @State private var username = ""
-    @State private var password = ""
+   // @State private var username = ""
+   // @State private var password = ""
+    
+    @StateObject private var viewModel = LoginViewModel()
+   // @State private var isLoggedin: Bool? = false
+    
+    
     var body: some View {
         NavigationView{
             
@@ -25,18 +30,21 @@ struct Login: View {
                         .bold()
                         .padding([.bottom, .trailing], 20.0)
                     
-                    TextField("Username", text: $username)
+                    TextField("Username", text: $viewModel.username)
                         .padding()
                         .frame(width : 300 , height : 50)
                         .background(Color.black.opacity(0.05))
                         .cornerRadius(10)
                     
-                    SecureField("Password", text : $password)
+                    SecureField("Password", text : $viewModel.password)
                         .padding(.all, 20.0)
                         .frame(width : 300 , height : 50)
                         .background(Color.black.opacity(0.05))
                         .cornerRadius(10)
                     
+                    Text(viewModel.errorMessage)
+                        .foregroundColor(.red)
+                        .padding(.bottom, 20.0)
                     
                     
                     Button("Login") {
@@ -48,13 +56,24 @@ struct Login: View {
                    .background(Color.blue)
                    .cornerRadius(10)
                 }
-                
+                .navigationBarHidden(true)
             }
             
         }
-        .navigationBarHidden(true)
+        
     }
+    
+   // private func login() {
+     //   guard viewModel.validate() else {
+       //     return
+        //}
+        //viewModel.signIn { success in if success {
+         //   isLoggedin = true
+            
+        //}}
+    //}
 }
+
 
 #Preview {
     Login()
