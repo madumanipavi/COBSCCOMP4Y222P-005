@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E80A5B32BB29BC400C556D9 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E80A5B22BB29BC400C556D9 /* TestView.swift */; };
+		0E80A5B52BB29EC100C556D9 /* TestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E80A5B42BB29EC100C556D9 /* TestViewModel.swift */; };
+		0E80A5B82BB2D0F000C556D9 /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E80A5B72BB2D0F000C556D9 /* TestModel.swift */; };
 		25F2B54E2BAC228400E6A773 /* ProductDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2B54D2BAC228400E6A773 /* ProductDetail.swift */; };
 		25F2B5502BAC4C0D00E6A773 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2B54F2BAC4C0D00E6A773 /* Cart.swift */; };
 		5176FF832BB1AA980065E5DE /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5176FF822BB1AA980065E5DE /* ProductViewModel.swift */; };
@@ -45,6 +48,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E80A5B22BB29BC400C556D9 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		0E80A5B42BB29EC100C556D9 /* TestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewModel.swift; sourceTree = "<group>"; };
+		0E80A5B72BB2D0F000C556D9 /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
 		25F2B54D2BAC228400E6A773 /* ProductDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetail.swift; sourceTree = "<group>"; };
 		25F2B54F2BAC4C0D00E6A773 /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
 		5176FF822BB1AA980065E5DE /* ProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewModel.swift; sourceTree = "<group>"; };
@@ -93,6 +99,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E80A5B62BB2D0D400C556D9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0E80A5B72BB2D0F000C556D9 /* TestModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		90B0D6D82B9F39C8002A6F25 = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +130,7 @@
 		90B0D6E32B9F39C8002A6F25 /* COBSCCOMP4Y222P-005 */ = {
 			isa = PBXGroup;
 			children = (
+				0E80A5B62BB2D0D400C556D9 /* Model */,
 				90B0D7152B9F426B002A6F25 /* ViewModel */,
 				90B0D70E2B9F3A75002A6F25 /* View */,
 				90B0D6E42B9F39C8002A6F25 /* COBSCCOMP4Y222P_005App.swift */,
@@ -162,6 +177,7 @@
 				25F2B54D2BAC228400E6A773 /* ProductDetail.swift */,
 				25F2B54F2BAC4C0D00E6A773 /* Cart.swift */,
 				5176FF842BB1B4030065E5DE /* ProductCategoryDetail.swift */,
+				0E80A5B22BB29BC400C556D9 /* TestView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -172,6 +188,7 @@
 				90B0D7162B9F429E002A6F25 /* SignupViewModel.swift */,
 				90A4EE832BA6EB95008BF02B /* LoginViewModel.swift */,
 				5176FF822BB1AA980065E5DE /* ProductViewModel.swift */,
+				0E80A5B42BB29EC100C556D9 /* TestViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -306,6 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E80A5B32BB29BC400C556D9 /* TestView.swift in Sources */,
 				5176FF852BB1B4030065E5DE /* ProductCategoryDetail.swift in Sources */,
 				90B0D7172B9F429E002A6F25 /* SignupViewModel.swift in Sources */,
 				9036990A2BA1E1DA00B0FCFB /* OfferPage.swift in Sources */,
@@ -316,7 +334,9 @@
 				90B0D7102B9F3AB6002A6F25 /* Login.swift in Sources */,
 				90B0D6E72B9F39C8002A6F25 /* ContentView.swift in Sources */,
 				25F2B54E2BAC228400E6A773 /* ProductDetail.swift in Sources */,
+				0E80A5B82BB2D0F000C556D9 /* TestModel.swift in Sources */,
 				90B0D6E52B9F39C8002A6F25 /* COBSCCOMP4Y222P_005App.swift in Sources */,
+				0E80A5B52BB29EC100C556D9 /* TestViewModel.swift in Sources */,
 				903699082BA1D95D00B0FCFB /* Home.swift in Sources */,
 				90A4EE842BA6EB95008BF02B /* LoginViewModel.swift in Sources */,
 			);
