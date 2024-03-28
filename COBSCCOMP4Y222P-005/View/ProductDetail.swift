@@ -70,9 +70,6 @@ struct ProductDetail: View {
                         
                         VStack(alignment: .leading, spacing: 16) {
                             
-                            
-                            
-                            
                             Text("Casual Printed Dress")
                                 .font(.title)
                                 .fontWeight(.bold)
@@ -111,9 +108,6 @@ struct ProductDetail: View {
                                         .background(Color.blue.opacity(0.7))
                                         .clipShape(Circle())
                                 }
-                                
-                                
-                                
                             }
                             
                             

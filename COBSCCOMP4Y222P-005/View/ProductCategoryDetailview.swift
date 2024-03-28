@@ -12,7 +12,7 @@ struct ProductCategoryDetailview: View {
     @State private var searchtext: String = ""
     @State private var selectedSubCategory: Int = 0
     
-    private let subcategory = ["Tops", "Dresses" , "Jeans" , "Skirts"]
+    private let subcategory = ["Tops", "Dresses" , "Jeans" , "Skirts", "Tshirts"]
     var body: some View {
         NavigationView{
             
@@ -48,8 +48,12 @@ struct ProductCategoryDetailview: View {
                         }
                     }
                     .padding()
-                }
+               }
+                 
+              
                 ProductList()
+                
+                MenuBar()
             }
             
         }
@@ -74,7 +78,7 @@ struct SearchBar2 : View {
             
             HStack{
                 
-                TextField(" Enter Username", text: $searchtext)
+                TextField(" Search Products", text: $searchtext)
                     .padding(.trailing, 60.0)
                     .frame(width : 300, height : 55)
                 //  .background(Color.black.opacity(0.05))
@@ -94,26 +98,28 @@ struct SearchBar2 : View {
     }
 }
 
+
 struct SubCategoryView: View{
     
     let isActive : Bool
     let text : String
     
     var body: some View{
-        VStack{
+        VStack(alignment: .leading, spacing: 0){
             Text(text)
-                .foregroundColor(isActive ? Color("Blue") : Color.blue)
+                .foregroundColor(isActive ? Color(.black) : Color.blue)
             
             if(isActive) {
                 Color("Primary")
                     .frame(width: 15, height: 2)
-                    .clipShape(Capsule())
+                   .clipShape(Capsule())
             }
             
         }
         .padding(.trailing)
     }
 }
+ 
 struct ProductList: View {
     var body: some View {
         
