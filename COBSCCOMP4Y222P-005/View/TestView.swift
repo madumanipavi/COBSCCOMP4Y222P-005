@@ -81,7 +81,7 @@ struct TestView: View {
                 .cornerRadius(10)
             
             VStack(alignment: .leading) {
-                Text(product.name ?? "")
+                Text(product.Product_name ?? "")
                     .font(.headline)
                     .foregroundColor(.black)
                 

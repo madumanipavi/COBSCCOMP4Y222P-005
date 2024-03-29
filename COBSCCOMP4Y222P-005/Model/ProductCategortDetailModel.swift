@@ -1,18 +1,22 @@
 //
-//  TestModel.swift
+//  ProductCategortDetailModel.swift
 //  COBSCCOMP4Y222P-005
 //
-//  Created by NIBM on 2024-03-26.
+//  Created by NIBM on 2024-03-29.
 //
 
 import Foundation
 
 
-struct TestModel: Codable {
-    let Products : [Items]?
+
+struct ProductCategortDetailModel: Codable {
+  
+    let Products : [Item]?
+    
 }
 
-struct Items:Codable {
+struct Item:Codable {
+    
     let _id: String
     let id: Int
     let Product_name: String
@@ -22,6 +26,7 @@ struct Items:Codable {
     let Image_url: String
     let __v : Int
     
-    
-    
+   
 }
+
+

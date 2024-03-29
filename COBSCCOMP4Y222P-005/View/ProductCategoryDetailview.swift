@@ -9,6 +9,14 @@ import SwiftUI
 
 struct ProductCategoryDetailview: View {
     
+ //   @StateObject var subcategoryproductVM : ProductCategoryDetailViewModel = ProductCategoryDetailViewModel()
+    
+    @StateObject var productVM : ProductCategoryDetailViewModel = ProductCategoryDetailViewModel()
+    
+    @State var navigate : Bool = false
+    
+    @State var selectedProduct : Item?
+    
     @State private var searchtext: String = ""
     @State private var selectedSubCategory: Int = 0
     
@@ -51,7 +59,22 @@ struct ProductCategoryDetailview: View {
                }
                  
               
-                ProductList()
+             //   ProductList()
+                ScrollView{
+                   
+                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
+                        ForEach(productVM.products, id: \.id) {
+                            //_ in
+                            //ProductCardView2()
+                            product in productCard( product : product)
+                        }
+                    }
+                    .padding(.horizontal)
+                    .padding(.bottom)
+                    .padding(.top)
+                    
+                    
+                }
                 
                 MenuBar()
             }
@@ -59,6 +82,93 @@ struct ProductCategoryDetailview: View {
         }
         .navigationBarHidden(true)
     }
+    @ViewBuilder func productCard (product : Item) -> some View {
+        //var body: some View{
+            VStack{
+                
+                HStack{
+                   
+                    Spacer()
+                    
+                    Button(action: {}
+                           
+                    ) {
+                        Image(systemName: "heart")
+                            .frame(width:5 , height:5)
+                            .padding()
+                           // .background(Color.red)
+                            .foregroundColor(.gray)
+                            .cornerRadius(7)
+                       
+                    }
+                    
+                }
+                .padding(10.0)
+                
+                Image("Product_image")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height:200)
+                    .cornerRadius(10)
+                
+                VStack{
+                    Text(product.Product_name ?? "")
+                        .font(.headline)
+                        .foregroundColor(.black)
+                        .padding(.trailing, 26.0)
+                    
+                    HStack{
+                        
+                        HStack{
+                            ForEach(0..<5){ _ in
+                                Image(systemName: "star.fill")
+                                    .frame(width:12, height :12)
+                                    .foregroundColor(.yellow)
+                            }
+                        }
+                        .padding(.trailing, 40.0)
+                        
+                    }
+                    
+                    
+                   
+                    
+                    HStack{
+                        
+                        Text("\(product.Price)")
+                            .font(.subheadline)
+                            .bold()
+                            .foregroundColor(.black)
+                            .padding(.top, 4)
+                        
+                        Spacer()
+                        
+                        Button(action: {}
+                               
+                        ) {
+                            Image(systemName: "cart")
+                                .frame(width:10 , height:10)
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(7)
+                           
+                        }
+                        
+                       
+                        
+                    }
+                    
+                }
+                .padding()
+                
+                
+                
+            }
+            .background(Color.white)
+            .cornerRadius(10)
+            .shadow(radius : 5)
+        }
 }
 
 struct SearchBar2 : View {
@@ -119,114 +229,109 @@ struct SubCategoryView: View{
         .padding(.trailing)
     }
 }
- 
+ /*
 struct ProductList: View {
     var body: some View {
         
-        ScrollView{
-           
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16 ){
-                ForEach(1...8, id: \.self){ _ in
-                 ProductBox()
-                }
-            }
-            .padding(.horizontal)
-            .padding(.bottom)
-            .padding(.top)
-            
-            
-        }
+      
     }
-}
-
-struct ProductBox: View {
-    var body: some View{
-        VStack{
-            
-            HStack{
-               
-                Spacer()
-                
-                Button(action: {}
-                       
-                ) {
-                    Image(systemName: "heart")
-                        .frame(width:5 , height:5)
-                        .padding()
-                       // .background(Color.red)
-                        .foregroundColor(.gray)
-                        .cornerRadius(7)
-                   
-                }
-                
-            }
-            .padding(10.0)
-            
-            Image("Product_image")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height:200)
-                .cornerRadius(10)
-            
+    @ViewBuilder func productCard (product : Item) -> some View {
+        var body: some View{
             VStack{
-                Text("Product Name")
-                    .font(.headline)
-                    .foregroundColor(.black)
-                    .padding(.trailing, 26.0)
                 
                 HStack{
-                    
-                    HStack{
-                        ForEach(0..<5){ _ in
-                            Image(systemName: "star.fill")
-                                .frame(width:12, height :12)
-                                .foregroundColor(.yellow)
-                        }
-                    }
-                    .padding(.trailing, 40.0)
-                    
-                }
-                
-                
-               
-                
-                HStack{
-                    
-                    Text("$99.99")
-                        .font(.subheadline)
-                        .bold()
-                        .foregroundColor(.black)
-                        .padding(.top, 4)
-                    
+                   
                     Spacer()
                     
                     Button(action: {}
                            
                     ) {
-                        Image(systemName: "cart")
-                            .frame(width:10 , height:10)
+                        Image(systemName: "heart")
+                            .frame(width:5 , height:5)
                             .padding()
-                            .background(Color.blue)
-                            .foregroundColor(.white)
+                           // .background(Color.red)
+                            .foregroundColor(.gray)
                             .cornerRadius(7)
                        
                     }
                     
+                }
+                .padding(10.0)
+                
+                Image("Product_image")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height:200)
+                    .cornerRadius(10)
+                
+                VStack{
+                    Text("Product Name")
+                        .font(.headline)
+                        .foregroundColor(.black)
+                        .padding(.trailing, 26.0)
+                    
+                    HStack{
+                        
+                        HStack{
+                            ForEach(0..<5){ _ in
+                                Image(systemName: "star.fill")
+                                    .frame(width:12, height :12)
+                                    .foregroundColor(.yellow)
+                            }
+                        }
+                        .padding(.trailing, 40.0)
+                        
+                    }
+                    
+                    
                    
                     
+                    HStack{
+                        
+                        Text("$99.99")
+                            .font(.subheadline)
+                            .bold()
+                            .foregroundColor(.black)
+                            .padding(.top, 4)
+                        
+                        Spacer()
+                        
+                        Button(action: {}
+                               
+                        ) {
+                            Image(systemName: "cart")
+                                .frame(width:10 , height:10)
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(7)
+                           
+                        }
+                        
+                       
+                        
+                    }
+                    
                 }
+                .padding()
+                
+                
                 
             }
-            .padding()
-            
-            
-            
+            .background(Color.white)
+            .cornerRadius(10)
+            .shadow(radius : 5)
         }
-        .background(Color.white)
-        .cornerRadius(10)
-        .shadow(radius : 5)
+}
+  */
+
+/*
+struct ProductBox: View {
+    var body: some View{
+        
     }
 }
+ */
 
 #Preview {
     ProductCategoryDetailview()

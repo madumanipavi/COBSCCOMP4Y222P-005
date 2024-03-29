@@ -1,8 +1,8 @@
 //
-//  TestViewModel.swift
+//  ProductCategoryDetailViewModel.swift
 //  COBSCCOMP4Y222P-005
 //
-//  Created by NIBM on 2024-03-26.
+//  Created by NIBM on 2024-03-29.
 //
 
 import Foundation
@@ -10,11 +10,11 @@ import SwiftUI
 import Combine
 
 
-class TestViewModel : ObservableObject {
+class ProductCategoryDetailViewModel : ObservableObject {
     
     var compose = Set<AnyCancellable>()
     
-    @Published var products : [Items] = []
+    @Published var products : [Item] = []
     
     init()
     {
@@ -27,11 +27,12 @@ class TestViewModel : ObservableObject {
         guard let getApiUrlString = URL(string: getApiUrlString) else {return}
         var getApiUrlRequest = URLRequest (url : getApiUrlString)
         //session
+        
         let getApiUrlSession = URLSession(configuration: .default)
         getApiUrlSession.dataTaskPublisher(for: getApiUrlRequest)
             .map(\.data)
             .retry(3)
-            .decode(type: TestModel.self, decoder: JSONDecoder())
+            .decode(type: ProductCategortDetailModel.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
             .receive(on: DispatchQueue.main)
             .sink{ res in
@@ -46,10 +47,4 @@ class TestViewModel : ObservableObject {
     }
         
     }
-
-
-
-
-
-
 
