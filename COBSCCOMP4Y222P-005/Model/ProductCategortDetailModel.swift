@@ -21,7 +21,7 @@ struct Item:Codable {
     let id: Int
     let Product_name: String
     let Subcategory_Id: String
-    let Price: Int
+    let Price: Double
     let Description: String
     let Image_url: String
     let __v : Int

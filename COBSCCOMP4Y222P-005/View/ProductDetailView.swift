@@ -21,6 +21,8 @@ struct ProductDetailView: View {
     var totalPrice: Double {
         return Double(quantity) * pricePerItem
     }
+    
+    @State var selectedProduct : Item?
     var body: some View {
         NavigationView{
             
@@ -109,6 +111,8 @@ struct ProductDetailView: View {
                             }
                                 
                         }
+                        
+                        Text(selectedProduct?.Product_name ?? "").bold()
                         
                         Text("Description")
                             .font(.headline)

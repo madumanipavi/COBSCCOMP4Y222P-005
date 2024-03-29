@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Kingfisher
+import URLImage
 
 struct ProductCategoryDetailview: View {
     
@@ -105,11 +107,36 @@ struct ProductCategoryDetailview: View {
                 }
                 .padding(10.0)
                 
-                Image("Product_image")
+              // Image("Top1")
+                /*
+                URLImage.url(URL(string:  (product.Image_url )))
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height:200)
                     .cornerRadius(10)
+                 */
+               
+               // KFImage(URL(string: product.Image_url)!)
+                
+                
+                /*
+                KFImage.url(URL(string: "https://storage.cloud.google.com/iosapi/Category/Woman" + (product.Image_url ?? "")))
+                    .resizable()
+                   .scaledToFill()
+                    .frame(width: 80)
+                    .clipShape(.rect(topLeadingRadius: 6,
+                                   bottomLeadingRadius: 6))
+                 */
+                
+               
+               
+                
+                URLImage(URL(string: product.Image_url)!){image in image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(height: 150)}
+
+                 
                 
                 VStack{
                     Text(product.Product_name ?? "")
