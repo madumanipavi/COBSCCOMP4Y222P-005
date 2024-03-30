@@ -28,10 +28,19 @@ struct ProductDetailView: View {
     
     let sizes = ["S", "M" , "L", "XL"]
     let colors: [(name: String, color:Color)] = [("Blue", .blue), ("Red", .red), ("Green", .green), ("Yellow", .yellow)]
+    
+//    var  priceProduct: Double {
+//        let priceItem = Double(selectedProduct?.Price ?? 0) ?? 0
+//        return
+//    }
    
-    var totalPrice: Float {
-        return Float(Double(quantity)) * pricePerItem
+    var totalPrice: Double {
+        
+        let priceItem = Double(selectedProduct?.Price ?? 0) ?? 0
+        return (Double(quantity)) * priceItem
     }
+    
+   
     
     var selectedProduct: Item?
   
@@ -97,16 +106,7 @@ struct ProductDetailView: View {
                             .foregroundColor(.black)
                             .padding(.top, 25.0)
                         
-                        VStack{
-                         Text("Price: \(selectedProduct?.Price ?? 0)")
-                                .font(.headline)
-                                .foregroundColor(.gray)
-                                .padding(.top, 8)
-                            
-                          
-                                   
-                                   
-                        }
+                      
                             
                          
                         
@@ -117,7 +117,7 @@ struct ProductDetailView: View {
                         
                                     
                         
-                        Text("Rs.\(String(format: "%.2f", pricePerItem))")
+                        Text("Rs.\(String(format: "%.2f", selectedProduct?.Price ?? 0))")
                             .foregroundColor(.black)
                             .padding(.horizontal, 5.0)
                         
