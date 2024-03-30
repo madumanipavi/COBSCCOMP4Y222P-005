@@ -25,16 +25,12 @@ struct ProductCategoryDetailview: View {
     private let subcategory = ["Tops", "Dresses" , "Jeans" , "Skirts", "Tshirts"]
     var body: some View {
         NavigationView{
-            
             VStack(){
                 HStack {
                     Text("Women")
                         .font(.title)
                         .bold()
                         .padding(.leading, 20.0)
-                    
-                        
-                    
                     Spacer()
                     Button(action: {}) {
                         Image(systemName: "slider.horizontal.3")
@@ -42,13 +38,9 @@ struct ProductCategoryDetailview: View {
                             .font(.title)
                             .foregroundColor(.black)
                     }
-                    
-                    
                 }
                 
                 SearchBar2(searchtext: $searchtext)
-                
-                
                 ScrollView(.horizontal, showsIndicators: false){
                     HStack{
                         ForEach(0..<subcategory.count) { i in
@@ -59,11 +51,8 @@ struct ProductCategoryDetailview: View {
                     }
                     .padding()
                }
-                 
-              
              //   ProductList()
                 ScrollView{
-                   
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                         ForEach(productVM.products, id: \.id) {
                             //_ in
@@ -74,26 +63,18 @@ struct ProductCategoryDetailview: View {
                     .padding(.horizontal)
                     .padding(.bottom)
                     .padding(.top)
-                    
-                    
                 }
-                
                 MenuBar()
             }
-            
         }
         .navigationBarHidden(true)
     }
     @ViewBuilder func productCard (product : Item) -> some View {
         //var body: some View{
             VStack{
-                
                 HStack{
-                   
                     Spacer()
-                    
                     Button(action: {}
-                           
                     ) {
                         Image(systemName: "heart")
                             .frame(width:5 , height:5)
@@ -101,51 +82,19 @@ struct ProductCategoryDetailview: View {
                            // .background(Color.red)
                             .foregroundColor(.gray)
                             .cornerRadius(7)
-                       
                     }
-                    
                 }
                 .padding(10.0)
-                
-              // Image("Top1")
-                /*
-                URLImage.url(URL(string:  (product.Image_url )))
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height:200)
-                    .cornerRadius(10)
-                 */
-               
-               // KFImage(URL(string: product.Image_url)!)
-                
-                
-                /*
-                KFImage.url(URL(string: "https://storage.cloud.google.com/iosapi/Category/Woman" + (product.Image_url ?? "")))
-                    .resizable()
-                   .scaledToFill()
-                    .frame(width: 80)
-                    .clipShape(.rect(topLeadingRadius: 6,
-                                   bottomLeadingRadius: 6))
-                 */
-                
-               
-               
-                
                 URLImage(URL(string: product.Image_url)!){image in image
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(height: 150)}
-
-                 
-                
                 VStack{
                     Text(product.Product_name ?? "")
                         .font(.headline)
                         .foregroundColor(.black)
                         .padding(.trailing, 26.0)
-                    
                     HStack{
-                        
                         HStack{
                             ForEach(0..<5){ _ in
                                 Image(systemName: "star.fill")
@@ -154,24 +103,15 @@ struct ProductCategoryDetailview: View {
                             }
                         }
                         .padding(.trailing, 40.0)
-                        
                     }
-                    
-                    
-                   
-                    
                     HStack{
-                        
                         Text("\(product.Price)")
                             .font(.subheadline)
                             .bold()
                             .foregroundColor(.black)
                             .padding(.top, 4)
-                        
                         Spacer()
-                        
                         Button(action: {}
-                               
                         ) {
                             Image(systemName: "cart")
                                 .frame(width:10 , height:10)
@@ -179,18 +119,10 @@ struct ProductCategoryDetailview: View {
                                 .background(Color.blue)
                                 .foregroundColor(.white)
                                 .cornerRadius(7)
-                           
                         }
-                        
-                       
-                        
                     }
-                    
                 }
                 .padding()
-                
-                
-                
             }
             .background(Color.white)
             .cornerRadius(10)

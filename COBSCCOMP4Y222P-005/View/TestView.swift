@@ -6,200 +6,190 @@
 //
 
 import SwiftUI
+import URLImage
+
 
 struct TestView: View {
     
-    @StateObject var productVM : TestViewModel = TestViewModel()
+    @State private var searchtext: String = ""
+    @State private var selectedSubCategory: Int = 0
+    private let subcategory = ["Tops", "Dresses" , "Jeans" , "Skirts", "Tshirts"]
+    var body: some View {
+        
+     
+        
+        NavigationView{
+            
+            VStack(){
+                
+                HStack {
+                    Text("Women")
+                        .font(.title)
+                        .bold()
+                        .padding(.leading, 20.0)
+                    Spacer()
+                    Button(action: {}) {
+                        Image(systemName: "slider.horizontal.3")
+                            .padding(.trailing, 20.0)
+                            .font(.title)
+                            .foregroundColor(.black)
+                    }
+                }
+                
+                SearchBar2(searchtext: $searchtext)
+                
+                ScrollView(.horizontal, showsIndicators: false){
+                    HStack{
+                        ForEach(0..<subcategory.count) { i in
+                            Button(action: { selectedSubCategory = i }){
+                                SubCategoryView(isActive: selectedSubCategory == i, text: subcategory[i])
+                            }
+                        }
+                    }
+                    .padding()
+               }
+                
+                ProductCategoryScrollView()
+                
+                MenuBar()
+                 
+                
+          
+                
+              
+                
+            }
+          //  .navigationTitle("Products")
+                  //      .navigationBarTitleDisplayMode(.inline)
+            
+        }
+        .navigationBarHidden(true)
+        
+      }
+               // .padding(.vertical, 8)
+            
+            
+        
+    }
+    
+   
+    
+
+struct ProductCategoryScrollView : View {
+    
+    @StateObject var productVM : ProductCategoryDetailViewModel = ProductCategoryDetailViewModel()
     
     @State var navigate : Bool = false
     
-    @State var selectedProduct : Items?
+    @State var selectedProduct : Item?
+    
+    
+    
+  
     
     var body: some View {
-        NavigationView{
-            ZStack{
-                VStack{
-                    
-                    /*
-                    List{
-                        ForEach(productVM.products, id: \.id){
-                            product in productCard( product : product)
+       
+        NavigationView {
+            
+        
+            //////////////////////////////
+            ScrollView{
+            //    VStack {
+                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
+                        ForEach(productVM.products, id: \.id) {
+                            product in productCard(product: product)
                         }
-                     
                     }
-                     */
-                  //  ProductGridView2()
-                    ScrollView {
-                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
-                            ForEach(productVM.products, id: \.id) {
-                                //_ in
-                                //ProductCardView2()
-                                product in productCard( product : product)
+              //  }
+                    .padding(.horizontal)
+                    .padding(.bottom)
+                    .padding(.top)
+              //  .navigationTitle("Products")
+                .navigationBarTitleDisplayMode(.inline)
+                .background(
+                    NavigationLink(
+                        destination: ProductDetailView(selectedProduct: selectedProduct),
+                        isActive: $navigate,
+                        label: { EmptyView() }
+                    )
+                )
+            }
+            
+            ///////////////////////////////////
+        }
+            }
+            
+            @ViewBuilder func productCard(product: Item) -> some View {
+                
+                    
+                    
+                    VStack() {
+                        HStack{
+                            Spacer()
+                            Button(action: {}
+                            ) {
+                                Image(systemName: "heart")
+                                    .frame(width:5 , height:5)
+                                    .padding()
+                                   // .background(Color.red)
+                                    .foregroundColor(.gray)
+                                    .cornerRadius(7)
                             }
                         }
-                        .padding(.horizontal)
-                                    .padding(.bottom)
+                        .padding(10.0)
+                        URLImage(URL(string: product.Image_url)!){image in image
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(height: 150)}
+                        VStack{
+                            Text(product.Product_name ?? "")
+                                .font(.headline)
+                                .foregroundColor(.black)
+                                .padding(.trailing, 26.0)
+                            HStack{
+                                HStack{
+                                    ForEach(0..<5){ _ in
+                                        Image(systemName: "star.fill")
+                                            .frame(width:12, height :12)
+                                            .foregroundColor(.yellow)
+                                    }
+                                }
+                                .padding(.trailing, 40.0)
+                            }
+                            HStack{
+                                Text("\(product.Price)")
+                                    .font(.subheadline)
+                                    .bold()
+                                    .foregroundColor(.black)
+                                    .padding(.top, 4)
+                                Spacer()
+                                Button(action: {}
+                                ) {
+                                    Image(systemName: "cart")
+                                        .frame(width:10 , height:10)
+                                        .padding()
+                                        .background(Color.blue)
+                                        .foregroundColor(.white)
+                                        .cornerRadius(7)
+                                }
+                            }
+                        }
+                        .padding()
+                        
+                       
+                    }
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .shadow(radius : 5)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        selectedProduct = product
+                        navigate = true
                     }
                 }
-            }
+               // .padding(.vertical, 8)
             
-        }
-    }
-    
-    @ViewBuilder func productCard (product : Items) -> some View {
-        
-      //  ProductGridView2()
-        /*
-        ZStack{
-            RoundedRectangle (cornerRadius: 10)
-                .frame(height:130)
-                .foregroundColor(.white)
-                .shadow(color : .black.opacity(0.2),radius:6)
-            HStack
-            {
-                
-                VStack{
-                    Text(product.name ?? "")
-                        .bold()
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    Text(product.category ?? "")  .frame(maxWidth: .infinity, alignment: .leading)
-                }
-            }.padding(.vertical,8)
-                .contentShape(Rectangle())
-            //update selected movie and trigger navigaion
-                
-                
-        }
-         */
-        
-        
-        VStack {
-            Image("product_image_placeholder")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 200)
-                .cornerRadius(10)
             
-            VStack(alignment: .leading) {
-                Text(product.Product_name ?? "")
-                    .font(.headline)
-                    .foregroundColor(.black)
-                
-                HStack {
-                    ForEach(0..<5) { _ in
-                        Image(systemName: "star.fill")
-                            .foregroundColor(.yellow)
-                    }
-                }
-                
-                Text("$99.99")
-                    .font(.subheadline)
-                    .fontWeight(.bold)
-                    .foregroundColor(.black)
-                    .padding(.top, 4)
-                
-                Spacer()
-                
-                HStack {
-                    Spacer()
-                    
-                    Button(action: {}) {
-                        Image(systemName: "cart")
-                            .padding()
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
-                    }
-                    
-                    Button(action: {}) {
-                        Image(systemName: "heart")
-                            .padding()
-                            .background(Color.red)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
-                    }
-                }
-            }
-            .padding()
-        }
-        .background(Color.white)
-        .cornerRadius(10)
-        .shadow(radius: 5)
-    }
-}
-
-/*
-struct ProductGridView2: View {
-    var body: some View {
-        ScrollView {
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
-                ForEach(1...8, id: \.self) { _ in
-                    ProductCardView2()
-                }
-            }
-            .padding(.horizontal)
-                        .padding(.bottom)
-        }
-    }
-}
- */
-
-
-struct ProductCardView2: View {
-    var body: some View {
-        VStack {
-            Image("product_image_placeholder")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 200)
-                .cornerRadius(10)
-            
-            VStack(alignment: .leading) {
-                Text("Product Name")
-                    .font(.headline)
-                    .foregroundColor(.black)
-                
-                HStack {
-                    ForEach(0..<5) { _ in
-                        Image(systemName: "star.fill")
-                            .foregroundColor(.yellow)
-                    }
-                }
-                
-                Text("$99.99")
-                    .font(.subheadline)
-                    .fontWeight(.bold)
-                    .foregroundColor(.black)
-                    .padding(.top, 4)
-                
-                Spacer()
-                
-                HStack {
-                    Spacer()
-                    
-                    Button(action: {}) {
-                        Image(systemName: "cart")
-                            .padding()
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
-                    }
-                    
-                    Button(action: {}) {
-                        Image(systemName: "heart")
-                            .padding()
-                            .background(Color.red)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
-                    }
-                }
-            }
-            .padding()
-        }
-        .background(Color.white)
-        .cornerRadius(10)
-        .shadow(radius: 5)
-    }
 }
 
 #Preview {
