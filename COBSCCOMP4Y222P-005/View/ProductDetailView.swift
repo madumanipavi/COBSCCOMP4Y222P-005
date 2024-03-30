@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import URLImage
 
 struct ProductDetailView: View {
     
@@ -14,15 +15,31 @@ struct ProductDetailView: View {
     @State private var selectedSize: String = "M"
     
     @State private var selectedColor: String = "Blue"
+    @State public var  pricePerItem: Float = 0
+    
+    @State public var  pricePerItems: String = ""
+    
+ 
+    
+    
+    
+    
+    
     
     let sizes = ["S", "M" , "L", "XL"]
     let colors: [(name: String, color:Color)] = [("Blue", .blue), ("Red", .red), ("Green", .green), ("Yellow", .yellow)]
-    let pricePerItem: Double = 1299
-    var totalPrice: Double {
-        return Double(quantity) * pricePerItem
+   
+    var totalPrice: Float {
+        return Float(Double(quantity)) * pricePerItem
     }
     
-     var selectedProduct : Item?
+    var selectedProduct: Item?
+  
+    
+    
+        
+    
+   
     var body: some View {
         NavigationView{
             
@@ -59,9 +76,11 @@ struct ProductDetailView: View {
                                 Image("Top1")
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
-                                    .padding(.top, 300.0)
-                                    .frame(width: 370, height: 230)
+                                    .frame(width: 370, height: 430)
+                                   // .scaledToFill()
                                    .clipped()
+                                
+                                
                                 
                             }
                             
@@ -76,6 +95,43 @@ struct ProductDetailView: View {
                             .font(.title)
                             .fontWeight(.bold)
                             .foregroundColor(.black)
+                            .padding(.top, 25.0)
+                        
+                        VStack{
+                         Text("Price: \(selectedProduct?.Price ?? 0)")
+                                .font(.headline)
+                                .foregroundColor(.gray)
+                                .padding(.top, 8)
+                            
+                          
+                                   
+                                   
+                        }
+                            
+                         
+                        
+//                        Text("\(pricePerItem)")
+//                            .foregroundColor(.black)
+//                            .padding(.horizontal, 5.0)
+                        
+                        
+                                    
+                        
+                        Text("Rs.\(String(format: "%.2f", pricePerItem))")
+                            .foregroundColor(.black)
+                            .padding(.horizontal, 5.0)
+                        
+                        
+                         
+                        
+//                        if let price = selectedProduct?.Price {
+//                                       pricePerItem = price
+//                                       Text("Price: \(pricePerItem)")
+//                                           .font(.headline)
+//                                           .foregroundColor(.gray)
+//                                           .padding(.top, 8)
+//                                   }
+                        
                         
                     //    Text("Name")
                    //     Text(selectedProduct?.Product_name ?? "").bold()
@@ -98,19 +154,22 @@ struct ProductDetailView: View {
                                     .foregroundColor(.white)
                                     .padding(12)
                                     .background(Color.blue.opacity(0.7))
+                                   // .frame(width: 40 , height: 40)
                                     .clipShape(Circle())
                             }
                             
                             Text("\(quantity)")
                                 .foregroundColor(.black)
+                                .padding(.horizontal, 5.0)
                             
                             Button(action: {
                                 quantity += 1
                             }){
-                                Image(systemName: "minus")
+                                Image(systemName: "plus")
                                     .foregroundColor(.white)
                                     .padding(12)
                                     .background(Color.blue.opacity(0.7))
+                                    .frame(width: 30 , height: 40)
                                     .clipShape(Circle())
                             }
                                 
@@ -122,7 +181,6 @@ struct ProductDetailView: View {
                             .bold()
                             .foregroundColor(.black)
                             .padding(.top, 8)
-                        
                         
                             /*import SwiftUI
                              
@@ -447,7 +505,62 @@ struct ProductDetailView: View {
                                 .foregroundColor(.black)
                         }
                         
-                        PopularProductsSection2()
+                     //   PopularProductsSection2()
+                        
+                        VStack{
+                            
+                            
+                            HStack(spacing: 16) {
+                                VStack {
+                                    HStack {
+                                        Text("Total Price:")
+                                            .foregroundColor(.black)
+                                            .font(.headline)
+                                            .fontWeight(.semibold)
+                                        
+                                        Spacer()
+                                        
+                                       
+                                        
+//                                        Text("\(totalPrice)")
+//                                            .foregroundColor(.black)
+//                                            .padding(.horizontal, 5.0)
+//                                        
+                                        Text("Rs.\(String(format: "%.2f", totalPrice))")
+                                            .foregroundColor(.black)
+                                            .padding(.horizontal, 5.0)
+                                        /*
+                                        Text("$\(totalPrice, specifier: "%.2f")")
+                                            .foregroundColor(.black)
+                                            .font(.headline)
+                                            .fontWeight(.semibold)
+                                         */
+                                    }
+                                    
+                                    Button(action: {}) {
+                                        Text("Add to Cart")
+                                            .foregroundColor(Color.white) // Use your custom blue color here
+                                            .font(.headline)
+                                            .fontWeight(.semibold)
+                                            .padding(.vertical, 12)
+                                            .padding(.horizontal, 24)
+                                            .background(Color.blue)
+                                            .cornerRadius(10)
+                                    }
+                                    .frame(width: 300) // Set the desired width
+                                    .padding(.top, 16)
+                                }
+                            }
+                                
+                          
+                            
+                            
+                            
+                        }
+                        .frame(width: 300, height : 80)
+                        .padding()
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(10)
                         
                         
                         
@@ -468,7 +581,68 @@ struct ProductDetailView: View {
         .navigationBarHidden(true)
         
     }
+   
+    
 }
+
+//struct PopularProductsSection2: View {
+//    var body: some View {
+//        VStack{
+//            
+//            
+//            HStack(spacing: 16) {
+//                VStack {
+//                    HStack {
+//                        Text("Total Price:")
+//                            .foregroundColor(.black)
+//                            .font(.headline)
+//                            .fontWeight(.semibold)
+//                        
+//                        Spacer()
+//                        
+//                        Text(" Rs.1299")
+//                            .foregroundColor(.black)
+//                            .font(.headline)
+//                            .fontWeight(.semibold)
+//                        
+//                        Text("\(pricePerItem)")
+//                            .foregroundColor(.black)
+//                            .padding(.horizontal, 5.0)
+//                        /*
+//                        Text("$\(totalPrice, specifier: "%.2f")")
+//                            .foregroundColor(.black)
+//                            .font(.headline)
+//                            .fontWeight(.semibold)
+//                         */
+//                    }
+//                    
+//                    Button(action: {}) {
+//                        Text("Add to Cart")
+//                            .foregroundColor(Color.white) // Use your custom blue color here
+//                            .font(.headline)
+//                            .fontWeight(.semibold)
+//                            .padding(.vertical, 12)
+//                            .padding(.horizontal, 24)
+//                            .background(Color.blue)
+//                            .cornerRadius(10)
+//                    }
+//                    .frame(width: 300) // Set the desired width
+//                    .padding(.top, 16)
+//                }
+//            }
+//                
+//          
+//            
+//            
+//            
+//        }
+//        .frame(width: 300, height : 80)
+//        .padding()
+//        .background(Color.gray.opacity(0.1))
+//        .cornerRadius(10)
+//    }
+//}
+
 
 #Preview {
     ProductDetailView()

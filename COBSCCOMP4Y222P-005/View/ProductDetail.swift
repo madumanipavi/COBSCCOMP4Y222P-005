@@ -189,7 +189,7 @@ struct ProductDetail: View {
                             
                             ////
                             ///
-                            PopularProductsSection2()
+                         //   PopularProductsSection2()
                             // .padding(.horizontal)
                             
                             
@@ -213,59 +213,6 @@ struct ProductDetail: View {
     }
 }
 
-struct PopularProductsSection2: View {
-    var body: some View {
-        VStack{
-            
-            
-            HStack(spacing: 16) {
-                VStack {
-                    HStack {
-                        Text("Total Price:")
-                            .foregroundColor(.black)
-                            .font(.headline)
-                            .fontWeight(.semibold)
-                        
-                        Spacer()
-                        
-                        Text(" Rs.1299")
-                            .foregroundColor(.black)
-                            .font(.headline)
-                            .fontWeight(.semibold)
-                        /*
-                        Text("$\(totalPrice, specifier: "%.2f")")
-                            .foregroundColor(.black)
-                            .font(.headline)
-                            .fontWeight(.semibold)
-                         */
-                    }
-                    
-                    Button(action: {}) {
-                        Text("Add to Cart")
-                            .foregroundColor(Color.white) // Use your custom blue color here
-                            .font(.headline)
-                            .fontWeight(.semibold)
-                            .padding(.vertical, 12)
-                            .padding(.horizontal, 24)
-                            .background(Color.blue)
-                            .cornerRadius(10)
-                    }
-                    .frame(width: 300) // Set the desired width
-                    .padding(.top, 16)
-                }
-            }
-                
-          
-            
-            
-            
-        }
-        .frame(width: 300, height : 80)
-        .padding()
-        .background(Color.gray.opacity(0.1))
-        .cornerRadius(10)
-    }
-}
 
 
 struct MenuBar2: View {
