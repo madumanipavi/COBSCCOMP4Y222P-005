@@ -21,12 +21,18 @@ struct SignUpView: View {
             
             VStack{
                 
-                Image("Image Name")
+                Image("Logo")
+                    .resizable()
+                    .padding(.vertical, 1.0)
+                    .frame(width: 100, height:100)
+                    //  .padding(.vertical, 0.0)
+                
+               
             
                 Text("Sign Up")
                     .font(.title)
                     .bold()
-                    .padding(.bottom)
+                    .padding(.top, 1.0)
                
                 VStack{
                     ZStack{
@@ -75,6 +81,42 @@ struct SignUpView: View {
                             .cornerRadius(5)
                         
                         TextField(" Enter email", text: $email)
+                            .padding(.trailing, 60.0)
+                            .frame(width : 300, height : 55)
+                        //  .background(Color.black.opacity(0.05))
+                            .cornerRadius(10)
+                        
+                    }
+                    .padding(.bottom, 5)
+                    
+                    ZStack{
+                        
+                        RoundedRectangle (cornerRadius: 10)
+                            .frame(width:350 , height:55
+                            )
+                            .foregroundColor(.black.opacity(0.05))
+                        // .border(Color.black)
+                            .cornerRadius(5)
+                        
+                        TextField(" Enter phone number", text: $email)
+                            .padding(.trailing, 60.0)
+                            .frame(width : 300, height : 55)
+                        //  .background(Color.black.opacity(0.05))
+                            .cornerRadius(10)
+                        
+                    }
+                    .padding(.bottom, 5)
+                    
+                    ZStack{
+                        
+                        RoundedRectangle (cornerRadius: 10)
+                            .frame(width:350 , height:55
+                            )
+                            .foregroundColor(.black.opacity(0.05))
+                        // .border(Color.black)
+                            .cornerRadius(5)
+                        
+                        TextField(" Enter Address", text: $email)
                             .padding(.trailing, 60.0)
                             .frame(width : 300, height : 55)
                         //  .background(Color.black.opacity(0.05))

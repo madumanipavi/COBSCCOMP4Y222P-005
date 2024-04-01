@@ -58,6 +58,8 @@ struct ProductDetailView: View {
                     
                     HStack(spacing: 1) {
                         
+                        Image(systemName: "arrow.backward")
+                            .padding(.leading, 30.0)
                         
                         Spacer()
                         Button(action: {}){
@@ -114,12 +116,18 @@ struct ProductDetailView: View {
 //                            .foregroundColor(.black)
 //                            .padding(.horizontal, 5.0)
                         
-                        
-                                    
-                        
-                        Text("Rs.\(String(format: "%.2f", selectedProduct?.Price ?? 0))")
-                            .foregroundColor(.black)
-                            .padding(.horizontal, 5.0)
+                        HStack{
+                            
+                            Text("Price :")
+                                .font(.title2)
+                                .fontWeight(.medium)
+                            
+                            
+                            Text("Rs.\(String(format: "%.2f", selectedProduct?.Price ?? 0))")
+                                .font(.title2)
+                                .foregroundColor(.black)
+                                .padding(.horizontal, 5.0)
+                        }
                         
                         
                          
@@ -575,6 +583,7 @@ struct ProductDetailView: View {
                     
                 }
               //  MenuBar()
+                MenuBar()
             }
             
         }

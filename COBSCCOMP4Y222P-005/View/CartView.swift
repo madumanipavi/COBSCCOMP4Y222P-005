@@ -11,6 +11,7 @@ import SwiftUI
 struct CartItem: Identifiable {
     let id = UUID()
     let productName: String
+    let productPrice: String
     var quantity: Int
     var isSelected: Bool
     var productImage: String
@@ -22,10 +23,12 @@ struct CartView: View {
     
     
     @State private var cartItems: [CartItem] = [
-           CartItem(productName: "Product 1", quantity: 1, isSelected: false, productImage: "product1"),
-           CartItem(productName: "Product 2", quantity: 2, isSelected: false, productImage: "product1"),
-           CartItem(productName: "Product 3", quantity: 3, isSelected: false, productImage: "product1")
+        CartItem(productName: "Woman dress",productPrice: "Rs.160.00", quantity: 1, isSelected: false, productImage: "Top1"),
+           CartItem(productName: "Casual dress",productPrice: "Rs.250.00", quantity: 2, isSelected: false, productImage: "Top1"),
+           CartItem(productName: "floral dress",productPrice: "Rs.110.00", quantity: 3, isSelected: false, productImage: "Top1")
        ]
+    
+    @State public var  deliveryPrice: String = "69.613"
        
        var totalPrice: Double {
            return cartItems.reduce(0) { $0 + Double($1.quantity) * 10 } // Assuming each product costs $10
@@ -36,10 +39,38 @@ struct CartView: View {
     var body: some View {
         NavigationView{
             VStack {
-                Text("My Cart")
-                    .font(.title)
-                    .padding(.top, 20)
-                    .padding(.horizontal)
+//                Text("My Cart")
+//                    .font(.title)
+//                    .padding(.top, 20)
+//                    .padding(.trailing, 100.0)
+                
+                HStack {
+                    //Image(systemName: "arrow.backward")
+                    Button(action: {}) {
+                        Image(systemName: "arrow.backward")
+                            .padding(.leading, 30.0)
+                           // .padding(.trailing, 30.0)
+                            //.padding(.trailing, 20.0)
+                            .font(.title)
+                            .foregroundColor(.black)
+                    }
+                   Spacer()
+                    
+                    Text("My Cart")
+                        .font(.title)
+                        .bold()
+                        .padding(.trailing, 200.0)
+                        //.padding(.leading, 20.0)
+                    
+                    
+                    
+                    
+                   
+                    
+                    
+                }
+                .padding(.top)
+                
                 List {
                                 ForEach(cartItems) { item in
                                     HStack {
@@ -64,7 +95,18 @@ struct CartView: View {
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .frame(width: 50, height: 50) // Adjust size as needed
-                                        Text(item.productName)
+                                        /////
+                                        ///
+                                        ///
+                                        VStack{
+                                            Text(item.productName)
+                                                .padding(.trailing, 50.0)
+                                                
+                                            Text(item.productPrice)
+                                                .font(.footnote)
+                                                .padding(.trailing, 90.0)
+                                                .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                                        }
                                         Spacer()
                                         Button(action: {
                                             // Decrease quantity
@@ -84,38 +126,126 @@ struct CartView: View {
                                             Image(systemName: "plus.circle")
                                         }
                                     }
+                                    ///////
                                 }
                             }
                         Spacer()
                 VStack{
-                    Text("Total Price: $\(totalPrice)")
-                        .padding()
+                    
+                    
+                    
+                   // Text("Delivery Charges: $\(deliveryPrice)")
+                    VStack{
+                        HStack{
+                            
+                            Text("Delivery Charges")
+                                .font(.subheadline)
+                                .padding(.leading, 40.0)
+                            
+                            Spacer()
+                            
+                            Text("Rs.619.00")
+                            // .padding()
+                                .padding(.trailing, 50.0)
+//                            Text("\(deliveryPrice)")
+//                            // .padding()
+//                                .padding(.trailing, 50.0)
+                            
+//                            Text("Rs.\(String(format: "%.2f", deliveryPrice))")
+//                                .font(.subheadline)
+//                                .foregroundColor(.black)
+//                                .padding(.trailing, 50.0)
+                            
+                            
+                        }
+                        .padding(.top, 10.0)
+                        
+                        
+                        Spacer()
+                        
+                        HStack{
+                            
+                            Text("Total Price")
+                                .font(.title3)
+                                .fontWeight(.medium)
+                                .padding(.leading, 40.0)
+                            
+                            Spacer()
+                            
+//                            Text("Rs.\(String(format: "%.2f", totalPrice))")
+//                                .fontWeight(.medium)
+//                                .foregroundColor(.black)
+//                                .padding(.trailing, 50.0)
+                            
+                            Text("Rs.5100.00")
+                                .padding(.trailing, 50.0)
+                            
+                            
+                        }
+                        .padding(.bottom, 3.0)
+                    }
+                    .frame(width:400, height: 70)
+                    
                     HStack {
                         Spacer()
-                        Button(action: {
-                            // Place order
-                        }) {
-                            
-                            Text("Cancel")
-                                .padding()
-                                .foregroundColor(.white)
-                                .background(Color.red)
-                                .cornerRadius(10)
-                                .frame(width: 150)
-                        }
+                       
                        // .frame(width: 150)
                         
-                       // Spacer()
-                        Button(action: {
-                            // Cancel order
-                        }) {
-                            Text("Place Order")
-                                .padding()
-                                .foregroundColor(.white)
-                                .background(Color.blue)
-                                .cornerRadius(10)
-                                .frame(width: 170)
+                        
+                        ZStack{
+                            
+                            RoundedRectangle (cornerRadius: 10)
+                                .frame(width:150 , height:55
+                                )
+                                .foregroundColor(.red)
+                            // .border(Color.black)
+                                .cornerRadius(5)
+                            
+                            Button(action: {
+                                // Place order
+                            }) {
+                                
+                                Text("Delete")
+                                    .padding()
+                                    .foregroundColor(.white)
+                                    .background(Color.red)
+                                    .cornerRadius(10)
+                                    .frame(width: 150, height: 45)
+                            }
+                            
                         }
+                        .padding(.bottom, 5)
+                        
+                      
+                        
+                       // Spacer()
+                        
+                        
+                        ZStack{
+                            
+                            RoundedRectangle (cornerRadius: 10)
+                                .frame(width:150 , height:55
+                                )
+                                .foregroundColor(.blue)
+                            // .border(Color.black)
+                                .cornerRadius(5)
+                            
+                            Button(action: {
+                                // Cancel order
+                            }) {
+                                Text("Check Out")
+                                    .padding()
+                                    .foregroundColor(.white)
+                                    .background(Color.blue)
+                                    .cornerRadius(10)
+                                    .frame(width: 170)
+                            }
+                            
+                        }
+                        .padding(.bottom, 5)
+                        
+                        
+                        
                      //   .frame(width: 150)
                         
                         Spacer()
@@ -123,7 +253,7 @@ struct CartView: View {
                     .padding()
                 }
                     }
-                    .navigationTitle("Cart")
+                  //  .navigationTitle()
         }
         .navigationBarHidden(true)
     }

@@ -16,12 +16,13 @@ struct LoginView: View {
             
             VStack{
                 
-                Image("Image Name")
-            
+              Image("Logo")
+                    .padding(.vertical, 0.0)
+                
                 Text("User Login")
                     .font(.title)
                     .bold()
-                    .padding(.bottom)
+                    .padding(.top, 1.0)
                
                 VStack{
                     ZStack{
@@ -33,7 +34,7 @@ struct LoginView: View {
                         // .border(Color.black)
                             .cornerRadius(5)
                         
-                        TextField(" Enter Username", text: $viewModel.username)
+                        TextField(" Enter Email", text: $viewModel.username)
                             .padding(.trailing, 60.0)
                             .frame(width : 300, height : 55)
                         //  .background(Color.black.opacity(0.05))

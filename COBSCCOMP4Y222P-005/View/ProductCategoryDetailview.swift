@@ -63,6 +63,14 @@ struct ProductCategoryDetailview: View {
                     .padding(.horizontal)
                     .padding(.bottom)
                     .padding(.top)
+                    .navigationBarTitleDisplayMode(.inline)
+                    .background(
+                        NavigationLink(
+                            destination: ProductDetailView(selectedProduct: selectedProduct),
+                            isActive: $navigate,
+                            label: { EmptyView() }
+                        )
+                    )
                 }
                 MenuBar()
             }
@@ -84,11 +92,11 @@ struct ProductCategoryDetailview: View {
                             .cornerRadius(7)
                     }
                 }
-                .padding(10.0)
+                .padding(1.0)
                 URLImage(URL(string: product.Image_url)!){image in image
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(height: 150)}
+                                    .frame(height: 200)}
                 VStack{
                     Text(product.Product_name ?? "")
                         .font(.headline)
@@ -105,7 +113,10 @@ struct ProductCategoryDetailview: View {
                         .padding(.trailing, 40.0)
                     }
                     HStack{
-                        Text("\(product.Price)")
+                        
+                        
+                        
+                        Text("Rs.\(String(format: "%.2f", product.Price ?? 0))")
                             .font(.subheadline)
                             .bold()
                             .foregroundColor(.black)
@@ -127,45 +138,15 @@ struct ProductCategoryDetailview: View {
             .background(Color.white)
             .cornerRadius(10)
             .shadow(radius : 5)
+            .contentShape(Rectangle())
+            .onTapGesture {
+                selectedProduct = product
+                navigate = true
+            }
         }
 }
 
-struct SearchBar2 : View {
-    
-    @Binding var searchtext : String
-    
-    var body: some View{
-        
-        ZStack{
-            
-            RoundedRectangle (cornerRadius: 10)
-                .frame(width:350 , height:55
-                )
-                .foregroundColor(.black.opacity(0.05))
-            // .border(Color.black)
-                .cornerRadius(5)
-            
-            HStack{
-                
-                TextField(" Search Products", text: $searchtext)
-                    .padding(.trailing, 60.0)
-                    .frame(width : 300, height : 55)
-                //  .background(Color.black.opacity(0.05))
-                    .cornerRadius(10)
-                
-                Button(action: {}){
-                    Image(systemName: "magnifyingglass")
-                        .foregroundColor(.black)
-                        .padding(.trailing, 3.0)
-                        
-                }
-            }
-            
-        }
-        .padding(.bottom, 5)
-        
-    }
-}
+
 
 
 struct SubCategoryView: View{
