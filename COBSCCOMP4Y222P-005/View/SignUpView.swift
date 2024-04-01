@@ -29,7 +29,7 @@ struct SignUpView: View {
                 
                
             
-                Text("Sign Up")
+                Text("Create an account")
                     .font(.title)
                     .bold()
                     .padding(.top, 1.0)

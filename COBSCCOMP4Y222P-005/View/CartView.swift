@@ -95,9 +95,6 @@ struct CartView: View {
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .frame(width: 50, height: 50) // Adjust size as needed
-                                        /////
-                                        ///
-                                        ///
                                         VStack{
                                             Text(item.productName)
                                                 .padding(.trailing, 50.0)
@@ -188,19 +185,14 @@ struct CartView: View {
                     
                     HStack {
                         Spacer()
-                       
                        // .frame(width: 150)
-                        
-                        
                         ZStack{
-                            
                             RoundedRectangle (cornerRadius: 10)
                                 .frame(width:150 , height:55
                                 )
                                 .foregroundColor(.red)
                             // .border(Color.black)
                                 .cornerRadius(5)
-                            
                             Button(action: {
                                 // Place order
                             }) {
@@ -215,21 +207,14 @@ struct CartView: View {
                             
                         }
                         .padding(.bottom, 5)
-                        
-                      
-                        
                        // Spacer()
-                        
-                        
                         ZStack{
-                            
                             RoundedRectangle (cornerRadius: 10)
                                 .frame(width:150 , height:55
                                 )
                                 .foregroundColor(.blue)
                             // .border(Color.black)
                                 .cornerRadius(5)
-                            
                             Button(action: {
                                 // Cancel order
                             }) {
@@ -240,19 +225,15 @@ struct CartView: View {
                                     .cornerRadius(10)
                                     .frame(width: 170)
                             }
-                            
                         }
                         .padding(.bottom, 5)
-                        
-                        
-                        
                      //   .frame(width: 150)
-                        
                         Spacer()
                     }
                     .padding()
                 }
-                    }
+                MenuBar()
+            }
                   //  .navigationTitle()
         }
         .navigationBarHidden(true)

@@ -35,7 +35,7 @@ struct HomeNewview: View {
                         
                         Spacer()
                         Button(action: {}) {
-                            Image(systemName: "slider.horizontal.3")
+                            Image(systemName: "line.3.horizontal")
                                 .padding(.trailing, 20.0)
                                 .font(.title)
                                 .foregroundColor(.black)
