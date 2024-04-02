@@ -19,109 +19,110 @@ import SwiftUI
 
 struct TestCartView: View {
     
-//    var selectedProduct : Items?
-//       @State private var selectedItem: Item? = nil
-//         @State private var items: [Item] = []
-//       
-//       private func saveItems() {
-//              let encoder = JSONEncoder()
-//              if let encoded = try? encoder.encode(items) {
-//                  UserDefaults.standard.set(encoded, forKey: "cartItems")
-//              }
-//          }
-//
-//      
-//          private func loadItems() {
-//              if let data = UserDefaults.standard.data(forKey: "cartItems") {
-//                  let decoder = JSONDecoder()
-//                  if let decoded = try? decoder.decode([Item].self, from: data) {
-//                      items = decoded
-//                  }
-//              }
-//          }
+    var selectedProduct : Items?
+//    @State private var selectedItem: Items? = nil
+//    @State private var items: [Item] = []
+//    
+//    private func saveItems() {
+//        let encoder = JSONEncoder()
+//        if let encoded = try? encoder.encode(items) {
+//            UserDefaults.standard.set(encoded, forKey: "cartItems")
+//        }
+//    }
+//    
+//    
+//    private func loadItems() {
+//        if let data = UserDefaults.standard.data(forKey: "cartItems") {
+//            let decoder = JSONDecoder()
+//            if let decoded = try? decoder.decode([Item].self, from: data) {
+//                items = decoded
+//            }
+//        }
+//    }
     
     var body: some View {
         
         Text("Hello world")
 //        ScrollView {
-//                    VStack {
+//            VStack {
 //                
-//                        
-//                        Spacer()
-//                        
-//                        Image(systemName: "cart.fill")
-//                            .resizable()
-//                            .aspectRatio(contentMode: .fit)
-//                            .frame(width: 100, height: 100)
-//                            .foregroundColor(.blue)
-//                        
-//                       
-//                        VStack {
-//                            Text("Items in My Cart:")
-//                                .font(.headline)
-//                                .foregroundColor(.black)
-//                                .padding(.top)
-//                            
-//                            ForEach(items, id: \.name) { item in
-//                                Button(action: {
-//                                    self.selectedItem = item
-//                                }) {
-//                                    ItemView(item: item)
-//                                }
-//                            }
-//                        }
-//                        
-//                        Spacer()
-//                   
-//                        
-//                        HStack {
-//                            Spacer()
-//                            
-//                            Button(action: {
-//                               
-//                            }) {
-//                                Text("Checkout")
-//                                    .font(.headline)
-//                                    .foregroundColor(.white)
-//                                    .padding()
-//                                    .background(Color.blue)
-//                                    .cornerRadius(10)
-//                            }
-//                            
-//                            Spacer()
-//                            
-//                            Button(action: {
-//                                
-//                            }) {
-//                                Text("Cancel")
-//                                    .font(.headline)
-//                                    .foregroundColor(.white)
-//                                    .padding()
-//                                    .background(Color.red)
-//                                    .cornerRadius(10)
-//                            }
-//                            
-//                            Spacer()
-//                        }
-//                        .padding(.bottom)
-//                    }
-//                    .padding()
+//                
+//                Spacer()
+//                
+//                Image(systemName: "cart.fill")
+//                    .resizable()
+//                    .aspectRatio(contentMode: .fit)
+//                    .frame(width: 100, height: 100)
+//                    .foregroundColor(.blue)
+//                
+//                
+//                VStack {
+//                    Text("Items in My Cart:")
+//                        .font(.headline)
+//                        .foregroundColor(.black)
+//                        .padding(.top)
 //                    
-//                    .onAppear {
-//                                      loadItems()
-//
-//                                   
-//                                      if let product = selectedProduct {
-//                                          items.append(Item(name: product.Product_Name,
-//                                                            image: product.Image_url,
-//                                                            details: product.Description,
-//                                                            quantity: 2))
-//                                          saveItems()
+//                    ForEach(items, id: \.name) { item in
+//                        Button(action: {
+//                            self.selectedItem = item
+//                        }) {
+//                            ItemView(item: item)
 //                        }
-//                       }
+//                    }
 //                }
+//                
+//                Spacer()
+//                
+                
+//                HStack {
+//                    Spacer()
+//                    
+//                    Button(action: {
+//                        
+//                    }) {
+//                        Text("Checkout")
+//                            .font(.headline)
+//                            .foregroundColor(.white)
+//                            .padding()
+//                            .background(Color.blue)
+//                            .cornerRadius(10)
+//                    }
+//                    
+//                    Spacer()
+//                    
+//                    Button(action: {
+//                        
+//                    }) {
+//                        Text("Cancel")
+//                            .font(.headline)
+//                            .foregroundColor(.white)
+//                            .padding()
+//                            .background(Color.red)
+//                            .cornerRadius(10)
+//                    }
+//                    
+//                    Spacer()
+//                }
+//                .padding(.bottom)
+//            }
+//            .padding()
+//            
+//            .onAppear {
+//                loadItems()
+//                
+//                
+//                if let product = selectedProduct {
+//                    items.append(Item(name: product.Product_name,
+//                                        image: product.Image_url,
+//                                        details: product.Description,
+//                                        quantity: 2))
+//                    saveItems()
+//                }
+//            }
+      //  }
     }
 }
+
 
 
 //struct ItemView: View {
@@ -130,15 +131,15 @@ struct TestCartView: View {
 //    var body: some View {
 //        HStack {
 //            VStack {
-//                Image(item.image)
+//                Image("")
 //                    .resizable()
 //                    .aspectRatio(contentMode: .fit)
 //                    .frame(width: 300, height: 50)
 //                
-//                Text(item.name)
+//                Text("")
 //                    .font(.headline)
 //                
-//                Text(item.details)
+//                Text("")
 //                    .font(.subheadline)
 //                    .foregroundColor(.gray)
 //                
@@ -162,15 +163,15 @@ struct TestCartView: View {
 //    var addItemToCart: (Item) -> Void
 //    var body: some View {
 //        VStack {
-//            Image(item.image)
+//            Image("")
 //                .resizable()
 //                .aspectRatio(contentMode: .fit)
 //                .frame(width: 200, height: 200)
 //            
-//            Text(item.name)
+//            Text("")
 //                .font(.headline)
 //            
-//            Text(item.details)
+//            Text("")
 //                .font(.subheadline)
 //                .foregroundColor(.gray)
 //            

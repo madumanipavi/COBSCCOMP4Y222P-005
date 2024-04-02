@@ -16,14 +16,16 @@ struct HomeNewview: View {
     
     @State var navigate : Bool = false
     
-    @State var selectedProduct : Item?
+    @State var selectedProduct : Item?  
     
     @State private var searchtext: String = ""
     @State private var selectedSubCategory: Int = 0
     
     var body: some View {
         
-      // NavigationView{
+       NavigationView{
+        
+        GeometryReader {geometry in
             VStack(){
                 //top bar
                 HStack {
@@ -49,8 +51,8 @@ struct HomeNewview: View {
                     VStack{
                         ZStack{
                             RoundedRectangle (cornerRadius: 10)
-                                .frame(width:350 , height:55
-                                )
+                              //  .frame(width:350 , height:55)
+                                .frame(width: geometry.size.width * 0.9)
                                 .foregroundColor(.black.opacity(0.05))
                             // .border(Color.black)
                                 .cornerRadius(20)
@@ -60,11 +62,12 @@ struct HomeNewview: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .padding(.horizontal, 10.0)
-                                    .frame(width: 370, height: 200)
+                                    .frame(width: geometry.size.width * 0.9)
+                                   // .frame(width: 370, height: 200)
                             }
                         }
                     }
-                    .padding(.vertical, 1.0)
+                    .padding(.bottom, 1.0)
                     
                     //category sectiom
                     VStack{
@@ -132,7 +135,8 @@ struct HomeNewview: View {
                 
                 MenuBar()
             }
-     //  }
+        }
+       }
      //  .navigationBarHidden(true)
     }
     @ViewBuilder func productCard (product : Item) -> some View {

@@ -22,8 +22,7 @@ struct SearchBar2 : View {
         ZStack{
             
             RoundedRectangle (cornerRadius: 10)
-                .frame(width:350 , height:55
-                )
+                .frame(width:350 , height:55)
                 .foregroundColor(.black.opacity(0.05))
             // .border(Color.black)
                 .cornerRadius(5)
