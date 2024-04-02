@@ -25,13 +25,13 @@ struct CategoriesSection2 : View {
                 
             ScrollView(.horizontal, showsIndicators: false){
                 HStack(spacing: 10) {
-                    CategoryBox2(imageName: "woman", categoryName: "Women", destination: AnyView(OfferPage()))
+                    CategoryBox2(imageName: "woman", categoryName: "Women", destination: AnyView(ProductCategoryDetailview()))
                     
-                    CategoryBox2(imageName: "men", categoryName: "Men", destination: AnyView(OfferPage()))
+                    CategoryBox2(imageName: "men", categoryName: "Men", destination: AnyView(ProductCategoryDetailview()))
                     
-                    CategoryBox2(imageName: "kids", categoryName: "Kids", destination: AnyView(OfferPage()))
+                    CategoryBox2(imageName: "kids", categoryName: "Kids", destination: AnyView(ProductCategoryDetailview()))
                     
-                    CategoryBox2(imageName: "Woman", categoryName: "Other", destination: AnyView(OfferPage()))
+                    CategoryBox2(imageName: "Woman", categoryName: "Other", destination: AnyView(ProductCategoryDetailview()))
 
                 }
                 .padding()
