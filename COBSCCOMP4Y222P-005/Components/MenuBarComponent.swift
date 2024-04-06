@@ -9,7 +9,11 @@ import SwiftUI
 
 struct MenuBarComponent: View {
     var body: some View {
-        MenuBar()
+      //  NavigationView {
+            MenuBar()
+      //          .navigationBarHidden(true)
+               // .navigationBarTitle(Text("Menu"))
+     //   }
     }
 }
 
@@ -19,19 +23,28 @@ struct MenuBar: View {
         HStack {
             Spacer()
             
-            MenuButton(imageName: "house.fill", text: "Home")
+            NavigationLink(destination: HomeNewview()) {
+                MenuButton(imageName: "house.fill", text: "Home" )
+            }
+            
+
+            Spacer()
+            
+            NavigationLink(destination: HomeNewview()) {
+                MenuButton(imageName: "heart.fill", text: "Favorites")
+            }
             
             Spacer()
             
-            MenuButton(imageName: "heart.fill", text: "Favorites")
+            NavigationLink(destination: CartView()) {
+                MenuButton(imageName: "cart.fill", text: "Cart")
+            }
             
             Spacer()
             
-            MenuButton(imageName: "cart.fill", text: "Cart")
-            
-            Spacer()
-            
-            MenuButton(imageName: "person.fill", text: "Profile")
+            NavigationLink(destination: HomeNewview()) {
+                MenuButton(imageName: "person.fill", text: "Profile")
+            }
             
             Spacer()
         }
@@ -52,6 +65,7 @@ struct MenuButton: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 25, height: 25)
+                .foregroundColor(.black)
             
             Text(text)
                 .font(.caption)
@@ -59,6 +73,8 @@ struct MenuButton: View {
         }
     }
 }
+
+
 
 
 

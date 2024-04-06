@@ -24,7 +24,8 @@ class HomeViewModel : ObservableObject {
     
     func loadGetProduct()
     {
-        let getApiUrlString = "https://cobsccomp4y222p-005-iosmongodbapi.onrender.com/products/"
+//        let getApiUrlString = "https://cobsccomp4y222p-005-iosmongodbapi.onrender.com/products/"
+        let getApiUrlString = "https://iosmongodbnewapi.onrender.com/api/products/"
         guard let getApiUrlString = URL(string: getApiUrlString) else {return}
         var getApiUrlRequest = URLRequest (url : getApiUrlString)
         //session

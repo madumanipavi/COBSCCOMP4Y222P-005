@@ -15,18 +15,58 @@ struct ProductCategortDetailModel: Codable {
     
 }
 
+
 struct Item:Codable {
-    
+
     let _id: String
-    let id: Int
+    let subcategoryID:String
     let Product_name: String
-    let Subcategory_Id: String
-    let Price: Double
-    let Description: String
+    let id: Int
+    let Description:String
     let Image_url: String
+    let Price: Double
+    let Availability:Int
+    let Tags:[String]
+    let availablesize:[String]
+    let availablecolor:[String]
     let __v : Int
     
-   
+    
+
+
 }
+//
+//struct Item:Codable {
+//    
+//    let _id: String
+//    let id: Int
+//    let Product_name: String
+//    let Subcategory_Id: String
+//    let Price: Double
+//    let Description: String
+//    let Image_url: String
+//    let __v : Int
+//    
+//   
+//}
+
+
+
+//struct Item:Codable {
+//    
+//    let _id: String
+//    let subcategoryID:String
+//    let Product_name: String
+//    let id: Int
+//    let Description:String
+//    let Image_url: String
+//    let Price: Double
+//    let Availability:Int
+//    let Tags:[String]
+//    let availablesize:[String]
+//    let availablecolor:[String]
+//    let __v : Int
+//   
+//}
 
 

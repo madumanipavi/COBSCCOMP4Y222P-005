@@ -12,7 +12,9 @@ import URLImage
 
 struct HomeNewview: View {
     
-    @StateObject var productVM : ProductCategoryDetailViewModel = ProductCategoryDetailViewModel()
+//    @StateObject var productVM : ProductCategoryDetailViewModel = ProductCategoryDetailViewModel()
+    
+    @StateObject var productVM : HomeViewModel = HomeViewModel()
     
     @State var navigate : Bool = false
     
@@ -137,7 +139,8 @@ struct HomeNewview: View {
             }
         }
        }
-     //  .navigationBarHidden(true)
+       .navigationBarHidden(true)
+       
     }
     @ViewBuilder func productCard (product : Item) -> some View {
         //var body: some View{

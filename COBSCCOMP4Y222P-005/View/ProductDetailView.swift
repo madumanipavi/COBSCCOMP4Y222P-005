@@ -58,8 +58,11 @@ struct ProductDetailView: View {
                     
                     HStack(spacing: 1) {
                         
-                        Image(systemName: "arrow.backward")
-                            .padding(.leading, 30.0)
+                        NavigationLink(destination: ProductCategoryDetailview()) {
+                            Image(systemName: "arrow.backward")
+                                .padding(.leading, 30.0)
+                        }
+                        .foregroundColor(.black)
                         
                         Spacer()
                         Button(action: {}){
@@ -83,17 +86,31 @@ struct ProductDetailView: View {
                             // .border(Color.black)
                                 .cornerRadius(20)
                             
-                            HStack{
-                                Image("Top1")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 370, height: 430)
-                                   // .scaledToFill()
-                                   .clipped()
-                                
-                                
-                                
-                            }
+//                            HStack{
+//                                Image("Top1")
+//                                    .resizable()
+//                                    .aspectRatio(contentMode: .fill)
+//                                    .frame(width: 370, height: 430)
+//                                   // .scaledToFill()
+//                                   .clipped()
+//                                
+//                                
+//                                
+//                            }
+                            
+                            HStack {
+                                if let imageUrlString = selectedProduct?.Image_url, let imageUrl = URL(string: imageUrlString) {
+                                            URLImage(imageUrl) { image in image
+                                                              .resizable()
+                                                              .aspectRatio(contentMode: .fill)
+                                                              .clipped()
+                                                           
+                                                      }
+                                                  } else {
+                                                      EmptyView()
+                                                  }
+                                              }
+
                             
                             
                         }
