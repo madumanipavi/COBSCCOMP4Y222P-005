@@ -20,12 +20,6 @@ struct ProductDetailView: View {
     @State public var  pricePerItems: String = ""
     
  
-    
-    
-    
-    
-    
-    
     let sizes = ["S", "M" , "L", "XL"]
     let colors: [(name: String, color:Color)] = [("Blue", .blue), ("Red", .red), ("Green", .green), ("Yellow", .yellow)]
     
@@ -41,21 +35,16 @@ struct ProductDetailView: View {
     }
     
    
-    
     var selectedProduct: Item?
   
-    
-    
-        
-    
-   
+  
     var body: some View {
         NavigationView{
             
             VStack{
                 
                 ScrollView{
-                    
+                    //back button and heart
                     HStack(spacing: 1) {
                         
                         NavigationLink(destination: ProductCategoryDetailview()) {
@@ -72,9 +61,9 @@ struct ProductDetailView: View {
                             
                         }
                         
-                        
                     }
                     
+                    //image
                     VStack{
                         
                         ZStack{
@@ -93,11 +82,10 @@ struct ProductDetailView: View {
 //                                    .frame(width: 370, height: 430)
 //                                   // .scaledToFill()
 //                                   .clipped()
-//                                
-//                                
-//                                
+   
 //                            }
                             
+                            //image
                             HStack {
                                 if let imageUrlString = selectedProduct?.Image_url, let imageUrl = URL(string: imageUrlString) {
                                             URLImage(imageUrl) { image in image
@@ -108,15 +96,14 @@ struct ProductDetailView: View {
                                                       }
                                                   } else {
                                                       EmptyView()
-                                                  }
-                                              }
+                                      }
+                                }
 
-                            
-                            
                         }
                     }
                     .padding(.vertical, 1.0)
                     
+                    //other section
                     VStack(alignment: .leading, spacing: 16) {
                         
                         Text(selectedProduct?.Product_name ?? "")
@@ -133,6 +120,7 @@ struct ProductDetailView: View {
 //                            .foregroundColor(.black)
 //                            .padding(.horizontal, 5.0)
                         
+                        //price
                         HStack{
                             
                             Text("Price :")
@@ -162,7 +150,9 @@ struct ProductDetailView: View {
                    //     Text(selectedProduct?.Product_name ?? "").bold()
                         
                         
+                        //rating and minus ,plus
                         HStack(spacing: 4){
+                            
                             ForEach(0..<5) { _ in
                                 Image(systemName: "star.fill")
                                     .foregroundColor(.yellow)
@@ -207,254 +197,7 @@ struct ProductDetailView: View {
                             .foregroundColor(.black)
                             .padding(.top, 8)
                         
-                            /*import SwiftUI
-                             
-                             class DeliveryAddressViewModel: ObservableObject
-                             {
-                                 static var shared: DeliveryAddressViewModel = DeliveryAddressViewModel()
-                                 
-                                 
-                                 @Published var txtName: String = ""
-                                 @Published var txtMobile: String = ""
-                                 @Published var txtAddress: String = ""
-                                 @Published var txtCity: String = ""
-                                 @Published var txtState: String = ""
-                                 @Published var txtPostalCode: String = ""
-                                 @Published var txtTypeName: String = "Home"
-                                 
-                                 
-                                 @Published var showError = false
-                                 @Published var errorMessage = ""
-                                 
-                                 @Published var listArr: [AddressModel] = []
-                                 
-                                 
-                                 init() {
-                                     serviceCallList()
-                                 }
-                                 
-                                 func clearAll(){
-                                     txtName = ""
-                                     txtMobile = ""
-                                     txtAddress = ""
-                                     txtCity = ""
-                                     txtState = ""
-                                     txtPostalCode = ""
-                                     txtTypeName = "Home"
-                                 }
-                                 
-                                 func setData(aObj: AddressModel) {
-                                     txtName = aObj.name
-                                     txtMobile = aObj.phone
-                                     txtAddress = aObj.address
-                                     txtCity = aObj.city
-                                     txtState = aObj.state
-                                     txtPostalCode = aObj.postalCode
-                                     txtTypeName = aObj.typeName
-                                 }
-                                 
-                                 
-                                 
-                                 //MARK: ServiceCall
-                                 
-                                 func serviceCallList(){
-                                     ServiceCall.post(parameter: [:], path: Globs.SV_ADDRESS_LIST, isToken: true ) { responseObj in
-                                         if let response = responseObj as? NSDictionary {
-                                             if response.value(forKey: KKey.status) as? String ?? "" == "1" {
-                                                 
-                                                 
-                                                 self.listArr = (response.value(forKey: KKey.payload) as? NSArray ?? []).map({ obj in
-                                                     return AddressModel(dict: obj as? NSDictionary ?? [:])
-                                                 })
-                                             
-                                             }else{
-                                                 self.errorMessage = response.value(forKey: KKey.message) as? String ?? "Fail"
-                                                 self.showError = true
-                                             }
-                                         }
-                                     } failure: { error in
-                                         self.errorMessage = error?.localizedDescription ?? "Fail"
-                                         self.showError = true
-                                     }
-                                 }
-                                 
-                                 func serviceCallRemove(cObj: AddressModel){
-                                     ServiceCall.post(parameter: ["address_id": cObj.id ], path: Globs.SV_REMOVE_ADDRESS, isToken: true ) { responseObj in
-                                         if let response = responseObj as? NSDictionary {
-                                             if response.value(forKey: KKey.status) as? String ?? "" == "1" {
-                                                 
-                                                 self.serviceCallList()
-                                             
-                                             }else{
-                                                 self.errorMessage = response.value(forKey: KKey.message) as? String ?? "Fail"
-                                                 self.showError = true
-                                             }
-                                         }
-                                     } failure: { error in
-                                         self.errorMessage = error?.localizedDescription ?? "Fail"
-                                         self.showError = true
-                                     }
-                                 }
-                                 
-                                 func serviceCallUpdateAddress( aObj: AddressModel?, didDone: (( )->())? ) {
-                                     ServiceCall.post(parameter: ["address_id":  aObj?.id ?? "", "name":  txtName, "type_name": txtTypeName, "phone": txtMobile, "address": txtAddress, "city": txtCity, "state": txtState, "postal_code": txtPostalCode ], path: Globs.SV_UPDATE_ADDRESS, isToken: true ) { responseObj in
-                                         if let response = responseObj as? NSDictionary {
-                                             if response.value(forKey: KKey.status) as? String ?? "" == "1" {
-                                                 self.clearAll()
-                                                 self.serviceCallList()
-                                                 didDone?()
-                                             }else{
-                                                 self.errorMessage = response.value(forKey: KKey.message) as? String ?? "Fail"
-                                                 self.showError = true
-                                             }
-                                         }
-                                     } failure: { error in
-                                         self.errorMessage = error?.localizedDescription ?? "Fail"
-                                         self.showError = true
-                                     }
-
-                                 }
-                                 
-                                 func serviceCallAddAddress(didDone: ((  )->())? ) {
-                                     ServiceCall.post(parameter: ["name":  txtName, "type_name": txtTypeName, "phone": txtMobile, "address": txtAddress, "city": txtCity, "state": txtState, "postal_code": txtPostalCode  ], path: Globs.SV_ADD_ADDRESS, isToken: true ) { responseObj in
-                                         if let response = responseObj as? NSDictionary {
-                                             if response.value(forKey: KKey.status) as? String ?? "" == "1" {
-                                                 self.clearAll()
-                                                 self.serviceCallList()
-                                                 didDone?( )
-                                             }else{
-                                                 self.errorMessage = response.value(forKey: KKey.message) as? String ?? "Fail"
-                                                 self.showError = true
-                                             }
-                                         }
-                                     } failure: { error in
-                                         self.errorMessage = error?.localizedDescription ?? "Fail"
-                                         self.showError = true
-                                     }
-
-                                 }
-                             
-                                 
-                                 
-                             }*/
-                            /*import SwiftUI
-                                 
-                                 class ForgotPasswordViewModel: ObservableObject
-                                 {
-                                     static var shared: ForgotPasswordViewModel = ForgotPasswordViewModel()
-                                     
-                                     
-                                     @Published var txtEmail: String = ""
-                                     @Published var txtResetCode: String = ""
-                                     
-                                     @Published var txtNewPassword: String = ""
-                                     @Published var txtConfirmPassword: String = ""
-                                     
-                                     @Published var isNewPassword: Bool = false
-                                     @Published var isConfirmPassword: Bool = false
-                                     
-                                     @Published var showVerify: Bool = false
-                                     @Published var showSetPassword: Bool = false
-                                     
-                                     @Published var showError = false
-                                     @Published var errorMessage = ""
-                                     
-                                    
-                                     var resetObj: NSDictionary?
-                                     
-                                    
-                                     
-                                     
-                                     
-                                     //MARK: ServiceCall
-                                     func serviceCallRequest(){
-                                         
-                                         if(!txtEmail.isValidEmail) {
-                                             self.errorMessage = "Please enter valid email address"
-                                             self.showError = true
-                                             return
-                                         }
-                                         
-                                         ServiceCall.post(parameter: ["email": txtEmail ], path: Globs.SV_FORGOT_PASSWORD_REQUEST, isToken: false ) { responseObj in
-                                             if let response = responseObj as? NSDictionary {
-                                                 if response.value(forKey: KKey.status) as? String ?? "" == "1" {
-                                                     self.showVerify = true
-                                                 }else{
-                                                     self.errorMessage = response.value(forKey: KKey.message) as? String ?? "Fail"
-                                                     self.showError = true
-                                                 }
-                                             }
-                                         } failure: { error in
-                                             self.errorMessage = error?.localizedDescription ?? "Fail"
-                                             self.showError = true
-                                         }
-                                     }
-                                     
-                                     func serviceCallVerify(){
-                                         
-                                         if(txtResetCode.count != 4) {
-                                             self.errorMessage = "Please enter valid otp"
-                                             self.showError = true
-                                             return
-                                         }
-                                         ServiceCall.post(parameter: ["email": txtEmail, "reset_code": txtResetCode ], path: Globs.SV_FORGOT_PASSWORD_VERIFY, isToken: false ) { responseObj in
-                                             if let response = responseObj as? NSDictionary {
-                                                 if response.value(forKey: KKey.status) as? String ?? "" == "1" {
-                                                     self.resetObj = response.value(forKey: KKey.payload) as? NSDictionary
-                                                     self.showSetPassword = true
-                                                 }else{
-                                                     self.errorMessage = response.value(forKey: KKey.message) as? String ?? "Fail"
-                                                     self.showError = true
-                                                 }
-                                             }
-                                         } failure: { error in
-                                             self.errorMessage = error?.localizedDescription ?? "Fail"
-                                             self.showError = true
-                                         }
-                                     }
-                                     
-                                     func serviceCallSetPassword(){
-                                         
-                                         if(txtNewPassword.count < 6) {
-                                             self.errorMessage = "Please enter new password minimum 6 character"
-                                             self.showError = true
-                                             return
-                                         }
-                                         
-                                         if(txtNewPassword != txtConfirmPassword) {
-                                             self.errorMessage = "password not match"
-                                             self.showError = true
-                                             return
-                                         }
-                                         
-                                         
-                                         ServiceCall.post(parameter: ["user_id": self.resetObj?.value(forKey: "user_id") ?? "", "reset_code":self.resetObj?.value(forKey: "reset_code") ?? "" , "new_password": txtNewPassword], path: Globs.SV_FORGOT_PASSWORD_SET_PASSWORD, isToken: false ) { responseObj in
-                                             if let response = responseObj as? NSDictionary {
-                                                 if response.value(forKey: KKey.status) as? String ?? "" == "1" {
-                                                     
-                                                     self.txtEmail = ""
-                                                     self.txtConfirmPassword = ""
-                                                     self.txtNewPassword = ""
-                                                     
-                                                     self.showSetPassword = false
-                                                     
-                                                     self.errorMessage = response.value(forKey: KKey.message) as? String ?? "Success"
-                                                     self.showError = true
-                                                     
-                                                 }else{
-                                                     self.errorMessage = response.value(forKey: KKey.message) as? String ?? "Fail"
-                                                     self.showError = true
-                                                 }
-                                             }
-                                         } failure: { error in
-                                             self.errorMessage = error?.localizedDescription ?? "Fail"
-                                             self.showError = true
-                                         }
-                                     }
-                                     
-                                     
-                                 }
-                                  */
+                           
 
                            Text(selectedProduct?.Description ?? "")
                             .foregroundColor(.black)
@@ -464,7 +207,9 @@ struct ProductDetailView: View {
                         Divider()
                             .background(Color.gray)
                         
+                        // selected size
                         VStack(alignment: .leading, spacing: 8) {
+                            
                             Text("Size")
                                 .font(.headline)
                                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -486,15 +231,13 @@ struct ProductDetailView: View {
                                     }
                                 }
                             }
-                            
-                            
-                            
+    
                         }
                         
                         Divider()
                             .background(Color.gray)
                         
-                        
+                        // selected color
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Color")
                                 .font(.headline)
@@ -520,7 +263,9 @@ struct ProductDetailView: View {
                         Divider()
                             .background(Color.gray)
                         
+                        // material section
                         VStack(alignment: .leading, spacing: 8) {
+                            
                             Text("Material")
                                 .font(.headline)
                                 .bold()
@@ -534,9 +279,10 @@ struct ProductDetailView: View {
                         
                         VStack{
                             
-                            
                             HStack(spacing: 16) {
+                                //Display tottla price box
                                 VStack {
+                                    
                                     HStack {
                                         Text("Total Price:")
                                             .foregroundColor(.black)
@@ -544,8 +290,6 @@ struct ProductDetailView: View {
                                             .fontWeight(.semibold)
                                         
                                         Spacer()
-                                        
-                                       
                                         
 //                                        Text("\(totalPrice)")
 //                                            .foregroundColor(.black)
@@ -576,18 +320,12 @@ struct ProductDetailView: View {
                                     .padding(.top, 16)
                                 }
                             }
-                                
-                          
-                            
-                            
                             
                         }
                         .frame(width: 300, height : 80)
                         .padding()
                         .background(Color.gray.opacity(0.1))
                         .cornerRadius(10)
-                        
-                        
                         
                     }
                     

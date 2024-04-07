@@ -31,7 +31,7 @@ struct CategoriesSection2 : View {
                     
                     CategoryBox2(imageName: "kids", categoryName: "Kids", destination: AnyView(ProductCategoryDetailview()))
                     
-                    CategoryBox2(imageName: "Woman", categoryName: "Other", destination: AnyView(ProductCategoryDetailview()))
+                    CategoryBox2(imageName: "other", categoryName: "Other", destination: AnyView(ProductCategoryDetailview()))
 
                 }
                 .padding()
@@ -60,7 +60,7 @@ struct CategoryBox2 : View {
                 Image(imageName)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 80, height: 70)
+                    .frame(width: 50, height: 70)
                 
                 Text(categoryName)
                     .font(.headline)

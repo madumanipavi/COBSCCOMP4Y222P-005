@@ -16,17 +16,30 @@ class ProductCategoryDetailViewModel : ObservableObject {
     
     @Published var products : [Item] = []
     
-    init()
-    {
-        loadGetProduct()
-    }
+//    init(for subcategory: String)
+//    {
+//        loadGetProduct(for: subcategory)
+//    }
     
-    func loadGetProduct()
+        init(for subcategory: String = "Dresses")
+        {
+            loadGetProduct(for: subcategory)
+        }
+    
+    func loadGetProduct(for subcategory: String)
     {
 //        let getApiUrlString = "https://cobsccomp4y222p-005-iosmongodbapi.onrender.com/products/subcategoryproducts/Dresses"
-        let getApiUrlString = "https://iosmongodbnewapi.onrender.com/api/products/catogory/6610d04933fbc2ce23a100c6"
+        //https://iosmongodbnewapi.onrender.com/api/products/category/name/Tops
+        
+//        let getApiUrlString = "https://iosmongodbnewapi.onrender.com/api/products/catogory/6610d04933fbc2ce23a100c6"
+        
+        let getApiUrlString = "https://iosmongodbnewapi.onrender.com/api/products/category/name/\(subcategory)"
+        
+        
+       
         guard let getApiUrlString = URL(string: getApiUrlString) else {return}
         var getApiUrlRequest = URLRequest (url : getApiUrlString)
+      
         //session
         
         let getApiUrlSession = URLSession(configuration: .default)

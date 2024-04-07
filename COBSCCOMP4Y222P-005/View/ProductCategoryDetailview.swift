@@ -13,16 +13,17 @@ struct ProductCategoryDetailview: View {
     
  //   @StateObject var subcategoryproductVM : ProductCategoryDetailViewModel = ProductCategoryDetailViewModel()
     
-    @StateObject var productVM : ProductCategoryDetailViewModel = ProductCategoryDetailViewModel()
+    @StateObject var productVM : ProductCategoryDetailViewModel = ProductCategoryDetailViewModel(for: "Dresses")
     
     @State var navigate : Bool = false
     
     @State var selectedProduct : Item?
     
     @State private var searchtext: String = ""
-    @State private var selectedSubCategory: Int = 0
+    @State var selectedSubCategory: String = "Dresses"
+//    @State private var selectedSubCategory: Int = 0
     
-    private let subcategory = ["Tops", "Dresses" , "Jeans" , "Skirts", "Tshirts"]
+    private let subcategory = ["Dresses" ,"Tops", "Jeans" , "Skirts", "Tshirts"]
     var body: some View {
         NavigationView{
             VStack(){
@@ -41,16 +42,33 @@ struct ProductCategoryDetailview: View {
                 }
                 
                 SearchBar2(searchtext: $searchtext)
-                ScrollView(.horizontal, showsIndicators: false){
-                    HStack{
-                        ForEach(0..<subcategory.count) { i in
-                            Button(action: { selectedSubCategory = i }){
-                                SubCategoryView(isActive: selectedSubCategory == i, text: subcategory[i])
-                            }
-                        }
-                    }
-                    .padding()
-               }
+                
+//                ScrollView(.horizontal, showsIndicators: false){
+//                    HStack{
+//                        ForEach(0..<subcategory.count) { i in
+//                            Button(action: { selectedSubCategory = i }){
+//                                SubCategoryView(isActive: selectedSubCategory == i, text: subcategory[i])
+//                            }
+//                        }
+//                    }
+//                    .padding()
+//               }
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                          HStack {
+                              ForEach(subcategory, id: \.self) { category in
+                                  Button(action: {
+                                      selectedSubCategory = category
+                                      productVM.loadGetProduct(for: selectedSubCategory)
+                                  }) {
+                                      SubCategoryView(isActive: selectedSubCategory == category, text: category)
+                                  }
+                              }
+                          }
+                          .padding()
+                      }
+
+                
              //   ProductList()
                 ScrollView{
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
