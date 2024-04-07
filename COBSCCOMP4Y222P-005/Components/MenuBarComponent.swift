@@ -32,7 +32,7 @@ struct MenuBar: View {
 
             Spacer()
             
-            NavigationLink(destination: HomeNewview(cartViewModel: cartViewModel)) {
+            NavigationLink(destination: FavouritesView(cartViewModel: cartViewModel)) {
                 MenuButton(imageName: "heart.fill", text: "Favorites")
             }
             

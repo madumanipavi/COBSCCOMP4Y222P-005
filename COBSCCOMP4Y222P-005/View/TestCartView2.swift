@@ -103,7 +103,7 @@ struct TestCartView2: View {
                 }
 
                 
-                let totalPrice = cartViewModel.cartItems.reduce(0.0) { $0 + ($1.total ?? 0.0) }
+                var totalPrice = cartViewModel.cartItems.reduce(0.0) { $0 + ($1.total ?? 0.0) }
                 //  .navigationBarTitle("Cart")
                 VStack{
                     
@@ -111,6 +111,24 @@ struct TestCartView2: View {
                     
                    // Text("Delivery Charges: $\(deliveryPrice)")
                     VStack{
+                        
+                        HStack{
+                            
+                            Text("Item Total")
+                                .font(.subheadline)
+                                .padding(.leading, 40.0)
+                            
+                            Spacer()
+                            
+                            Text("Rs.\(String(format: "%.2f", totalPrice))")
+                            // .padding()
+                                .padding(.trailing, 50.0)
+//
+                            
+                            
+                        }
+                        .padding(.top, 10.0)
+                        
                         HStack{
                             
                             Text("Delivery Charges")
@@ -122,21 +140,16 @@ struct TestCartView2: View {
                             Text("Rs.619.00")
                             // .padding()
                                 .padding(.trailing, 50.0)
-//                            Text("\(deliveryPrice)")
-//                            // .padding()
-//                                .padding(.trailing, 50.0)
-                            
-//                            Text("Rs.\(String(format: "%.2f", deliveryPrice))")
-//                                .font(.subheadline)
-//                                .foregroundColor(.black)
-//                                .padding(.trailing, 50.0)
+
                             
                             
                         }
-                        .padding(.top, 10.0)
+                        .padding(.top, 1.0)
                         
                         
                         Spacer()
+                        Divider()
+                            .background(Color.gray)
                         
                         HStack{
                             
@@ -152,7 +165,11 @@ struct TestCartView2: View {
 //                                .foregroundColor(.black)
 //                                .padding(.trailing, 50.0)
                             
-                            Text("Rs.\(String(format: "%.2f", totalPrice))")
+                            var totalPrice = cartViewModel.cartItems.reduce(0.0) { $0 + ($1.total ?? 0.0) }
+                            
+                            var subtotal = totalPrice + 619.00
+                            
+                            Text("Rs.\(String(format: "%.2f", subtotal))")
                                                         .fontWeight(.medium)
                                                         .foregroundColor(.black)
                                                         .padding(.trailing, 50.0)
@@ -161,7 +178,7 @@ struct TestCartView2: View {
                         }
                         .padding(.bottom, 3.0)
                     }
-                    .frame(width:400, height: 70)
+                    .frame(width:400, height: 95)
                     
                     HStack {
                         Spacer()
@@ -195,16 +212,21 @@ struct TestCartView2: View {
                                 .foregroundColor(.blue)
                             // .border(Color.black)
                                 .cornerRadius(5)
-                            Button(action: {
-                                // Cancel order
-                            }) {
-                                Text("Check Out")
-                                    .padding()
-                                    .foregroundColor(.white)
-                                    .background(Color.blue)
-                                    .cornerRadius(10)
-                                    .frame(width: 170)
+                            
+                            NavigationLink(destination: LoginView()) {
+                                Button(action: {
+                                    // Cancel order
+                                }) {
+                                    Text("Check Out")
+                                        .padding()
+                                        .foregroundColor(.white)
+                                        .background(Color.blue)
+                                        .cornerRadius(10)
+                                        .frame(width: 170)
+                                }
                             }
+                            
+                            
                         }
                         .padding(.bottom, 5)
                      //   .frame(width: 150)

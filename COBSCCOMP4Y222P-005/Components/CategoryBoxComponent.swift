@@ -29,11 +29,11 @@ struct CategoriesSection2 : View {
                 HStack(spacing: 10) {
                     CategoryBox2(imageName: "woman", categoryName: "Women", destination: AnyView(ProductCategoryDetailview(cartViewModel: cartViewModel)), cartViewModel: cartViewModel)
                     
-                    CategoryBox2(imageName: "men", categoryName: "Men", destination: AnyView(ProductCategoryDetailview(cartViewModel: cartViewModel)), cartViewModel: cartViewModel)
+                    CategoryBox2(imageName: "men", categoryName: "Men", destination: AnyView(MenDetailView(cartViewModel: cartViewModel)), cartViewModel: cartViewModel)
                     
-                    CategoryBox2(imageName: "kids", categoryName: "Kids", destination: AnyView(ProductCategoryDetailview(cartViewModel: cartViewModel)), cartViewModel: cartViewModel)
+                    CategoryBox2(imageName: "kids", categoryName: "Kids", destination: AnyView(KidsDetailView(cartViewModel: cartViewModel)), cartViewModel: cartViewModel)
                     
-                    CategoryBox2(imageName: "other", categoryName: "Other", destination: AnyView(ProductCategoryDetailview(cartViewModel: cartViewModel)), cartViewModel: cartViewModel)
+                    CategoryBox2(imageName: "other", categoryName: "Other", destination: AnyView(OtherDetailView(cartViewModel: cartViewModel)), cartViewModel: cartViewModel)
 
                 }
                 .padding()
