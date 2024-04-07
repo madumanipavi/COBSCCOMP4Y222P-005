@@ -15,6 +15,6 @@ struct Products: Codable, Identifiable {
     let price: Double
     let image: String
     var quantity: Int
-    let total: Double
+    var total: Double
 }
 

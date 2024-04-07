@@ -141,7 +141,31 @@ struct ProductCategoryDetailview: View {
                             .foregroundColor(.black)
                             .padding(.top, 4)
                         Spacer()
-                        Button(action: {}
+                        Button(action: {
+                          
+                            if let selectedProduct = selectedProduct {
+                                            let product =
+                                Products(
+                                    id: selectedProduct._id,
+                                                                 
+                                    productName: selectedProduct.Product_name,
+                                                                  
+                                                                 
+                                   selectedSize: "s",
+                                  selectedColor: "green",
+                                                                 
+                                    price: selectedProduct.Price,
+                                    image: selectedProduct.Image_url,                      quantity: 1,
+                                
+                                    total: selectedProduct.Price)
+                                            cartViewModel
+                                //.addToCart(product: product)
+                                .addToCart(product: product, selectedSize: nil, selectedColor: nil, quantity: 1, total: selectedProduct.Price)
+                                        }
+                            
+                            
+                            
+                        }
                         ) {
                             Image(systemName: "cart")
                                 .frame(width:10 , height:10)
@@ -188,110 +212,7 @@ struct SubCategoryView: View{
         .padding(.trailing)
     }
 }
- /*
-struct ProductList: View {
-    var body: some View {
-        
-      
-    }
-    @ViewBuilder func productCard (product : Item) -> some View {
-        var body: some View{
-            VStack{
-                
-                HStack{
-                   
-                    Spacer()
-                    
-                    Button(action: {}
-                           
-                    ) {
-                        Image(systemName: "heart")
-                            .frame(width:5 , height:5)
-                            .padding()
-                           // .background(Color.red)
-                            .foregroundColor(.gray)
-                            .cornerRadius(7)
-                       
-                    }
-                    
-                }
-                .padding(10.0)
-                
-                Image("Product_image")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height:200)
-                    .cornerRadius(10)
-                
-                VStack{
-                    Text("Product Name")
-                        .font(.headline)
-                        .foregroundColor(.black)
-                        .padding(.trailing, 26.0)
-                    
-                    HStack{
-                        
-                        HStack{
-                            ForEach(0..<5){ _ in
-                                Image(systemName: "star.fill")
-                                    .frame(width:12, height :12)
-                                    .foregroundColor(.yellow)
-                            }
-                        }
-                        .padding(.trailing, 40.0)
-                        
-                    }
-                    
-                    
-                   
-                    
-                    HStack{
-                        
-                        Text("$99.99")
-                            .font(.subheadline)
-                            .bold()
-                            .foregroundColor(.black)
-                            .padding(.top, 4)
-                        
-                        Spacer()
-                        
-                        Button(action: {}
-                               
-                        ) {
-                            Image(systemName: "cart")
-                                .frame(width:10 , height:10)
-                                .padding()
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(7)
-                           
-                        }
-                        
-                       
-                        
-                    }
-                    
-                }
-                .padding()
-                
-                
-                
-            }
-            .background(Color.white)
-            .cornerRadius(10)
-            .shadow(radius : 5)
-        }
-}
-  */
-
-/*
-struct ProductBox: View {
-    var body: some View{
-        
-    }
-}
- */
-
+ 
 #Preview {
     ProductCategoryDetailview(cartViewModel: CartViewModel())
 }

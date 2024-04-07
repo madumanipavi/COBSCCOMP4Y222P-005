@@ -16,14 +16,11 @@ struct TestCartView2: View {
             self.cartViewModel = cartViewModel
         }
     
-    
     var body: some View {
         NavigationView {
             VStack{
                 HStack {
-                   
-                    
-                    
+          
                     NavigationLink(destination: HomeNewview(cartViewModel: cartViewModel)) {
                         Image(systemName: "arrow.backward")
                             .padding(.leading, 30.0)
@@ -39,45 +36,72 @@ struct TestCartView2: View {
                         .bold()
                         .padding(.trailing, 200.0)
                         //.padding(.leading, 20.0)
-                    
-                    
-                    
-                    
-                   
-                    
-                    
+        
                 }
                 .padding(.top)
                 
+//                List {
+//                    ForEach(cartViewModel.cartItems) { item in
+//                       
+//                        HStack{
+//                            
+//                            VStack{
+//                                Text(item.productName)
+//                                
+//                                
+//                                
+//                                
+//                                Text("Rs.\(String(format: "%.2f", item.total ?? 0))")
+//                                    .font(.title2)
+//                                    .foregroundColor(.black)
+//                                    .padding(.horizontal, 5.0)
+//                            }
+//                            Spacer()
+//                            
+//                            Text("\(String( item.quantity ?? 0))")
+//                                .font(.title2)
+//                                .foregroundColor(.black)
+//                                .padding(.horizontal, 5.0)
+//                            
+//                            
+//                            
+//                            
+//                        }
+//  
+//                        
+//                    }
+//                }
+                
+                
                 List {
-                    ForEach(cartViewModel.cartItems) { item in
-                       
-                        HStack{
-                            
-                            VStack{
-                                Text(item.productName)
-                                
-                                
-                                
-                                
-                                Text("Rs.\(String(format: "%.2f", item.total ?? 0))")
+                    ForEach(cartViewModel.cartItems.indices, id: \.self) { index in
+                        HStack {
+                            VStack {
+                                Text(cartViewModel.cartItems[index].productName)
+                                Text("Rs.\(String(format: "%.2f", cartViewModel.cartItems[index].total))")
                                     .font(.title2)
                                     .foregroundColor(.black)
                                     .padding(.horizontal, 5.0)
                             }
                             Spacer()
-                            
-                            Text("\(String( item.quantity ?? 0))")
+                            Text("\(cartViewModel.cartItems[index].quantity)")
                                 .font(.title2)
                                 .foregroundColor(.black)
                                 .padding(.horizontal, 5.0)
                             
-                            
+                            Button(action: {
+                                // Remove the item from the cart
+                                cartViewModel.cartItems.remove(at: index)
+                                // Save the updated cart items
+                                cartViewModel.saveCartItems()
+                            }) {
+                                Image(systemName: "trash")
+                                    .foregroundColor(.red)
+                            }
                         }
-  
-                        
                     }
                 }
+
                 
                 let totalPrice = cartViewModel.cartItems.reduce(0.0) { $0 + ($1.total ?? 0.0) }
                 //  .navigationBarTitle("Cart")
@@ -133,9 +157,7 @@ struct TestCartView2: View {
                                                         .foregroundColor(.black)
                                                         .padding(.trailing, 50.0)
                             
-                            
-                            
-                            
+                         
                         }
                         .padding(.bottom, 3.0)
                     }

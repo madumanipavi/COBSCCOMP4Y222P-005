@@ -403,7 +403,9 @@ struct ProductDetailView: View {
                                                                               quantity: quantity,
                                             
                                                 total: totalPrice)
-                                                        cartViewModel.addToCart(product: product)
+                                                        cartViewModel
+                                            //.addToCart(product: product)
+                                            .addToCart(product: product, selectedSize: selectedSize, selectedColor: selectedColor, quantity: quantity, total: totalPrice)
                                                     }
                                     }) {
                                         Text("Add to Cart")
