@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PaymentSuccessfulView: View {
+    @ObservedObject var cartViewModel: CartViewModel
     var body: some View {
         VStack{
             Spacer()
@@ -182,10 +183,10 @@ struct PaymentSuccessfulView: View {
             }
             .padding(.top, 40.0)
         }
-        MenuBar()
+        MenuBar(cartViewModel: cartViewModel)
     }
 }
 
 #Preview {
-    PaymentSuccessfulView()
+    PaymentSuccessfulView(cartViewModel: CartViewModel())
 }

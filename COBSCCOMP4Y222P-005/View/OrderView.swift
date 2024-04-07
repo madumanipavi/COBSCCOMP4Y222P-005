@@ -12,6 +12,7 @@ import SwiftUI
 
 struct OrderView: View {
     
+    @ObservedObject var cartViewModel: CartViewModel
     @State private var cartItems: [CartItem] = [
         CartItem(productName: "Woman dress",productPrice: "Rs.160.00", quantity: 1, isSelected: false, productImage: "Top1"),
            CartItem(productName: "Casual dress",productPrice: "Rs.250.00", quantity: 2, isSelected: false, productImage: "Top1"),
@@ -296,10 +297,10 @@ struct OrderView: View {
             .padding(.top, 40.0)
         }
         
-        MenuBar()
+        MenuBar(cartViewModel: cartViewModel)
     }
 }
 
 #Preview {
-    OrderView()
+    OrderView(cartViewModel: CartViewModel())
 }

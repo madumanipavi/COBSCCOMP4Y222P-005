@@ -71,7 +71,7 @@ struct ContentView: View {
                       .disabled(isShowingAnotherView) // Disable interaction with the content when AnotherView is presented
                                
                      if isShowingAnotherView {
-                        HomeNewview()
+                        HomeNewview(cartViewModel: CartViewModel())
                         .transition(.opacity) // Apply fade-in transition
                     }
                }

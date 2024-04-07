@@ -13,6 +13,8 @@ import URLImage
 
 struct ProductDetailView: View {
     
+    @ObservedObject var cartViewModel: CartViewModel
+    
     
     @State private var quantity: Int = 1
 //    @State private var selectedSize: String = "M"
@@ -58,7 +60,7 @@ struct ProductDetailView: View {
                     //back button and heart
                     HStack(spacing: 1) {
                         
-                        NavigationLink(destination: ProductCategoryDetailview()) {
+                        NavigationLink(destination: ProductCategoryDetailview(cartViewModel: cartViewModel)) {
                             Image(systemName: "arrow.backward")
                                 .padding(.leading, 30.0)
                         }
@@ -383,7 +385,27 @@ struct ProductDetailView: View {
                                          */
                                     }
                                     
-                                    Button(action: {}) {
+                                    Button(action: {
+                                        
+                                        if let selectedProduct = selectedProduct {
+                                                        let product = 
+                                            Products(
+                                                id: selectedProduct._id,
+                                                                             
+                                                productName: selectedProduct.Product_name,
+                                                                              
+                                                                             
+                                                selectedSize: selectedSize,
+                                                selectedColor: selectedColor,
+                                                                             
+                                                price: selectedProduct.Price,
+                                                image: selectedProduct.Image_url,
+                                                                              quantity: quantity,
+                                            
+                                                total: totalPrice)
+                                                        cartViewModel.addToCart(product: product)
+                                                    }
+                                    }) {
                                         Text("Add to Cart")
                                             .foregroundColor(Color.white) // Use your custom blue color here
                                             .font(.headline)
@@ -415,7 +437,7 @@ struct ProductDetailView: View {
                     
                 }
               //  MenuBar()
-                MenuBar()
+                MenuBar(cartViewModel: cartViewModel)
             }
             
         }
@@ -498,7 +520,12 @@ struct ProductDetailView: View {
 //    }
 //}
 
-
 #Preview {
-    ProductDetailView()
+    ProductDetailView(cartViewModel: CartViewModel())
 }
+
+//struct ProductDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ProductDetailView(cartViewModel: CartViewModel()) // Provide an instance of CartViewModel
+//    }
+//}

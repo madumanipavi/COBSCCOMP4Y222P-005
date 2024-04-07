@@ -21,7 +21,7 @@ struct CartItem: Identifiable {
 
 struct CartView: View {
     
-    
+    @ObservedObject var cartViewModel: CartViewModel
     @State private var cartItems: [CartItem] = [
         CartItem(productName: "Woman dress",productPrice: "Rs.160.00", quantity: 1, isSelected: false, productImage: "Top1"),
            CartItem(productName: "Casual dress",productPrice: "Rs.250.00", quantity: 2, isSelected: false, productImage: "Top1"),
@@ -70,16 +70,19 @@ struct CartView: View {
                     
                 }
                 .padding(.top)
-                
+                /////////////
                 List {
                                 ForEach(cartItems) { item in
                                     HStack {
+                                        
+                                        //toggle button
                                         Button(action: {
                                             // Toggle selection
                                             if let index = cartItems.firstIndex(where: { $0.id == item.id }) {
                                                 cartItems[index].isSelected.toggle()
                                             }
                                         }) {
+                                            
                                             ZStack {
                                                 Circle()
                                                     .strokeBorder(item.isSelected ? Color.blue : Color.gray, lineWidth: 2)
@@ -91,10 +94,14 @@ struct CartView: View {
                                                 }
                                             }
                                         }
+                                        
+                                        
+                                        
                                         Image(item.productImage) // Display product image
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .frame(width: 50, height: 50) // Adjust size as needed
+                                        //product name,product price
                                         VStack{
                                             Text(item.productName)
                                                 .padding(.trailing, 50.0)
@@ -104,7 +111,10 @@ struct CartView: View {
                                                 .padding(.trailing, 90.0)
                                                 .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
                                         }
+                                        
                                         Spacer()
+                                        
+                                        //minus button
                                         Button(action: {
                                             // Decrease quantity
                                             if let index = cartItems.firstIndex(where: { $0.id == item.id }), cartItems[index].quantity > 1 {
@@ -113,7 +123,10 @@ struct CartView: View {
                                         }) {
                                             Image(systemName: "minus.circle")
                                         }
+                                        //qauntity
                                         Text("\(item.quantity)")
+                                        
+                                        //plus button
                                         Button(action: {
                                             // Increase quantity
                                             if let index = cartItems.firstIndex(where: { $0.id == item.id }) {
@@ -127,6 +140,9 @@ struct CartView: View {
                                 }
                             }
                         Spacer()
+                
+                /////////////////////
+                
                 VStack{
                     
                     
@@ -232,7 +248,7 @@ struct CartView: View {
                     }
                     .padding()
                 }
-                MenuBar()
+                MenuBar(cartViewModel: cartViewModel)
             }
                   //  .navigationTitle()
         }
@@ -241,5 +257,5 @@ struct CartView: View {
 }
 
 #Preview {
-    CartView()
+    CartView(cartViewModel: CartViewModel())
 }

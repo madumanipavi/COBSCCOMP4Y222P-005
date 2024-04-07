@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PaymentView: View {
+    @ObservedObject var cartViewModel: CartViewModel
     var body: some View {
         
         
@@ -234,10 +235,10 @@ struct PaymentView: View {
             }
             .padding(.top, 40.0)
         }
-        MenuBar()
+        MenuBar(cartViewModel: cartViewModel)
     }
 }
 
 #Preview {
-    PaymentView()
+    PaymentView(cartViewModel: CartViewModel())
 }

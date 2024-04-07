@@ -9,7 +9,7 @@ import SwiftUI
 
 
 
-//struct Item: Identifiable, Codable {
+//struct Item2: Identifiable, Codable {
 //    var id = UUID()
 //    var name: String
 //    var image: String
@@ -19,13 +19,13 @@ import SwiftUI
 
 struct TestCartView: View {
     
-    var selectedProduct : Items?
-//    @State private var selectedItem: Items? = nil
-//    @State private var items: [Item] = []
+//    var selectedProduct : Item?
+//    @State private var selectedItem: Item? = nil
+//    @State private var item: [Item2] = []
 //    
 //    private func saveItems() {
 //        let encoder = JSONEncoder()
-//        if let encoded = try? encoder.encode(items) {
+//        if let encoded = try? encoder.encode(item) {
 //            UserDefaults.standard.set(encoded, forKey: "cartItems")
 //        }
 //    }
@@ -34,8 +34,8 @@ struct TestCartView: View {
 //    private func loadItems() {
 //        if let data = UserDefaults.standard.data(forKey: "cartItems") {
 //            let decoder = JSONDecoder()
-//            if let decoded = try? decoder.decode([Item].self, from: data) {
-//                items = decoded
+//            if let decoded = try? decoder.decode([Item2].self, from: data) {
+//                item = decoded
 //            }
 //        }
 //    }
@@ -43,17 +43,19 @@ struct TestCartView: View {
     var body: some View {
         
         Text("Hello world")
-//        ScrollView {
-//            VStack {
-//                
-//                
+        
+        
+        
+//        VStack {
+//            
+//            ScrollView{
 //                Spacer()
 //                
 //                Image(systemName: "cart.fill")
 //                    .resizable()
 //                    .aspectRatio(contentMode: .fit)
 //                    .frame(width: 100, height: 100)
-//                    .foregroundColor(.blue)
+//                    .foregroundColor(.yellow)
 //                
 //                
 //                VStack {
@@ -62,168 +64,262 @@ struct TestCartView: View {
 //                        .foregroundColor(.black)
 //                        .padding(.top)
 //                    
-//                    ForEach(items, id: \.name) { item in
-//                        Button(action: {
-//                            self.selectedItem = item
-//                        }) {
-//                            ItemView(item: item)
+//                    ForEach(item) { item2 in
+//                        ItemView(item2: item2,
+//                                 incrementAction: {
+//                            if let index = item.firstIndex(where: { $0.id == item.id }) {
+//                                item[index].quantity += 1
+//                                saveItems()
+//                            }
+//                        },
+//                                 decrementAction: {
+//                            if let index = item.firstIndex(where: { $0.id == item.id }) {
+//                                if item[index].quantity > 1 {
+//                                    item[index].quantity -= 1
+//                                    saveItems()
+//                                }
+//                            }
+//                        }
+//                        )
+//                    }
+//                    
+//                    
+//                    Spacer()
+//                    VStack {
+//                        VStack {
+//                            VStack {
+//                                HStack {
+//                                    Text("Item Total")
+////                                        .font(.custom(Constants.AppFont.regularFont, size: 13))
+////                                        .foregroundColor(Constants.AppColor.Black)
+//                                    Spacer()
+//                                    Text("Ru.1000.00")
+////                                        .font(.custom(Constants.AppFont.boldFont, size: 13))
+////                                        .foregroundColor(Constants.AppColor.Black)
+//                                }
+//                                .padding(.top, 10)
+//                                .padding(.horizontal, 15)
+//                                
+//                                HStack {
+//                                    Text("Delivery Charges")
+////                                        .font(.custom(Constants.AppFont.regularFont, size: 13))
+////                                        .foregroundColor(Constants.AppColor.Black)
+//                                    Spacer()
+//                                    Text("Ru:150.00")
+////                                        .font(.custom(Constants.AppFont.boldFont, size: 13))
+////                                        .foregroundColor(Constants.AppColor.Black)
+//                                }
+//                                .padding(.top, 5)
+//                                .padding(.horizontal, 15)
+//                                
+//                                HStack {
+//                                    Text("Discount")
+////                                        .font(.custom(Constants.AppFont.regularFont, size: 13))
+////                                        .foregroundColor(Constants.AppColor.Black)
+//                                    Spacer()
+//                                    Text("10%")
+////                                        .font(.custom(Constants.AppFont.boldFont, size: 13))
+////                                        .foregroundColor(Color.init(hex: "036440"))
+//                                }
+//                                .padding(.top, 5)
+//                                .padding(.horizontal, 15)
+//                                
+//                                
+//                                .padding(.vertical, 5)
+//                                
+//                                HStack {
+//                                    Text("Total Amount")
+////                                        .font(.custom(Constants.AppFont.boldFont, size: 16))
+////                                        .foregroundColor(Constants.AppColor.Black)
+//                                    Spacer()
+//                                    Text("Ru: 1050.00")
+////                                        .font(.custom(Constants.AppFont.boldFont, size: 16))
+////                                        .foregroundColor(Constants.AppColor.Black)
+//                                }
+//                                .padding(.horizontal, 15)
+//                                .padding(.bottom, 5)
+//                                
+//                                
+//                            }
+//                            .padding(.top, 2)
+//                            
+//                            
+//                            VStack {
+//                                HStack {
+//                                    Spacer()
+//                                    
+//                                    Button(action: {
+//                                        
+//                                    }) {
+//                                        Text("Checkout")
+//                                            .font(.headline)
+//                                            .foregroundColor(.white)
+//                                            .padding()
+//                                            .background(Color.yellow)
+//                                            .cornerRadius(10)
+//                                    }
+//                                    
+//                                    Spacer()
+//                                    
+//                                    Button(action: {
+//                                        
+//                                    }) {
+//                                        Text("Cancel")
+//                                            .font(.headline)
+//                                            .foregroundColor(.white)
+//                                            .padding()
+//                                            .background(Color.gray)
+//                                            .cornerRadius(10)
+//                                    }
+//                                    
+//                                    Spacer()
+//                                }
+//                                .padding(.bottom)
+//                            }
 //                        }
 //                    }
+//                    .padding()
 //                }
-//                
-//                Spacer()
-//                
-                
-//                HStack {
-//                    Spacer()
+//                .onAppear {
+//                    loadItems()
 //                    
-//                    Button(action: {
+//                    
+//                    if let product = selectedProduct {
+//                        item.append(Item2(name: product.Product_name,
+//                                          image: product.Image_url,
+//                                          details: product.Description,
+//                                          quantity: 2,
+//                                          price: product.Price))
+//                        saveItems()
 //                        
-//                    }) {
-//                        Text("Checkout")
-//                            .font(.headline)
-//                            .foregroundColor(.white)
-//                            .padding()
-//                            .background(Color.blue)
-//                            .cornerRadius(10)
 //                    }
 //                    
-//                    Spacer()
-//                    
-//                    Button(action: {
-//                        
-//                    }) {
-//                        Text("Cancel")
-//                            .font(.headline)
-//                            .foregroundColor(.white)
-//                            .padding()
-//                            .background(Color.red)
-//                            .cornerRadius(10)
-//                    }
-//                    
-//                    Spacer()
 //                }
-//                .padding(.bottom)
+//                
 //            }
-//            .padding()
 //            
-//            .onAppear {
-//                loadItems()
-//                
-//                
-//                if let product = selectedProduct {
-//                    items.append(Item(name: product.Product_name,
-//                                        image: product.Image_url,
-//                                        details: product.Description,
-//                                        quantity: 2))
-//                    saveItems()
-//                }
-//            }
-      //  }
+//        }
+
     }
 }
 
 
 
+
+//struct ItemCellTypeThree: View {
+// var item2: Item2
+// var body: some View {
+//     HStack {
+//         Image("Image3")
+//             .resizable()
+//             .aspectRatio(contentMode: .fit)
+//             .frame(width: 100, height: 100)
+//         
+//         VStack(alignment: .leading, spacing: 8) {
+//             Text(item2.name)
+//                 .font(.headline)
+//                 .foregroundColor(.black)
+//             
+//             Text(item2.details)
+//                 .font(.subheadline)
+//                 .foregroundColor(.gray)
+//             
+//             HStack {
+//                 Button(action: {}) {
+//                     Image(systemName: "minus")
+//                         .foregroundColor(.gray)
+//                         .frame(width: 25, height: 25)
+//                 }
+//                 
+//                 Text("1")
+//                 
+//                 Button(action: {}) {
+//                     Image(systemName: "plus")
+//                         .foregroundColor(.gray)
+//                         .frame(width: 25, height: 25)
+//                 }
+//             }
+//         }
+//         .padding()
+//         .background(Color.white)
+//         .cornerRadius(10)
+//         .shadow(radius: 5)
+//         .padding()
+//         
+//         Spacer()
+//     }
+//     .frame(maxWidth: .infinity)
+// }
+//}
+//
 //struct ItemView: View {
-//    var item: Item
-//    
-//    var body: some View {
-//        HStack {
-//            VStack {
-//                Image("")
-//                    .resizable()
-//                    .aspectRatio(contentMode: .fit)
-//                    .frame(width: 300, height: 50)
-//                
-//                Text("")
-//                    .font(.headline)
-//                
-//                Text("")
-//                    .font(.subheadline)
-//                    .foregroundColor(.gray)
-//                
-//                
-//            }
-//            .padding()
-//            .background(Color.white)
-//            .cornerRadius(10)
-//            .shadow(radius: 5)
-//            .padding()
-//            .frame(maxWidth: .infinity)
-//        }
-//    }
+// var item2: Item2
+// @State private var quantity: Int = 1
+// var incrementAction: (() -> Void)? = nil
+// var decrementAction: (() -> Void)? = nil
+//
+// var body: some View {
+//     HStack {
+//         Image("Image3")
+//             .resizable()
+//             .aspectRatio(contentMode: .fit)
+//             .frame(width: 100, height: 100)
+//         
+//         VStack(alignment: .leading) {
+//             HStack {
+//                 Text(item2.name)
+//                     .font(.headline)
+//                 Spacer()
+//                 Button(action: {
+//                     // Remove the item from the cart or perform any other action
+//                 }) {
+//                     Image(systemName: "trash")
+//                         .foregroundColor(Color.black)
+//                 }
+//             }
+//             
+//             Text(item2.details)
+//                 .font(.subheadline)
+//                 .foregroundColor(.gray)
+//             
+//             HStack {
+//                 Button(action: {
+//                     if quantity > 1 {
+//                         quantity -= 1
+//                         // Update the quantity in the cart
+//                     }
+//                 }) {
+//                     Image(systemName: "minus.circle")
+//                         .font(.title)
+//                 }
+//                 .padding()
+//                 
+//                 Text("\(quantity)")
+//                 
+//                 Button(action: {
+//                     if quantity < 10 {
+//                         quantity += 1
+//                         // Update the quantity in the cart
+//                     }
+//                 }) {
+//                     Image(systemName: "plus.circle")
+//                         .font(.title)
+//                 }
+//                 .padding()
+//             }
+//         }
+//         .padding()
+//         .background(Color.white)
+//         .cornerRadius(10)
+//         .shadow(radius: 5)
+//         .padding()
+//         
+//         Spacer()
+//     }
+//     .frame(maxWidth: .infinity)
+// }
 //}
 
-
-//struct ItemDetailView: View {
-//    @State private var quantity: Int = 1
-//    
-//    var item: Item
-//    var addItemToCart: (Item) -> Void
-//    var body: some View {
-//        VStack {
-//            Image("")
-//                .resizable()
-//                .aspectRatio(contentMode: .fit)
-//                .frame(width: 200, height: 200)
-//            
-//            Text("")
-//                .font(.headline)
-//            
-//            Text("")
-//                .font(.subheadline)
-//                .foregroundColor(.gray)
-//            
-//            Stepper("Quantity: \(quantity)", value: $quantity, in: 1...10)
-//                .padding()
-//            
-//            HStack {
-//                Spacer()
-//                
-//                Button(action: {
-//                    
-//                    if quantity > 1 {
-//                        quantity -= 1
-//                    }
-//                }) {
-//                    Image(systemName: "minus.circle")
-//                        .font(.title)
-//                }
-//                .padding()
-//                
-//                Button(action: {
-//                    
-//                    if quantity < 10 {
-//                        quantity += 1
-//                    }
-//                }) {
-//                    Image(systemName: "plus.circle")
-//                        .font(.title)
-//                }
-//                .padding()
-//                
-//                Spacer()
-//                Button(action: {
-//                    let newItem = Item(name: item.name, image: item.image, details: item.details, quantity: quantity)
-//                    addItemToCart(newItem)
-//                }) {
-//                    Text("Add to Cart")
-//                        .font(.headline)
-//                        .foregroundColor(.white)
-//                        .padding()
-//                        .background(Color.blue)
-//                        .cornerRadius(10)
-//                }
-//            }
-//            .padding()
-//            .background(Color.white)
-//            .cornerRadius(10)
-//            .shadow(radius: 5)
-//            .padding()
-//        }
-//    }
-//}
 
 #Preview {
     TestCartView()

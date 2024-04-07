@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct MenuBarComponent: View {
+    @ObservedObject var cartViewModel: CartViewModel
     var body: some View {
       //  NavigationView {
-            MenuBar()
+            MenuBar(cartViewModel: cartViewModel)
       //          .navigationBarHidden(true)
                // .navigationBarTitle(Text("Menu"))
      //   }
@@ -19,30 +20,31 @@ struct MenuBarComponent: View {
 
 
 struct MenuBar: View {
+    @ObservedObject var cartViewModel: CartViewModel
     var body: some View {
         HStack {
             Spacer()
             
-            NavigationLink(destination: HomeNewview()) {
+            NavigationLink(destination: HomeNewview(cartViewModel: cartViewModel)) {
                 MenuButton(imageName: "house.fill", text: "Home" )
             }
             
 
             Spacer()
             
-            NavigationLink(destination: HomeNewview()) {
+            NavigationLink(destination: HomeNewview(cartViewModel: cartViewModel)) {
                 MenuButton(imageName: "heart.fill", text: "Favorites")
             }
             
             Spacer()
             
-            NavigationLink(destination: CartView()) {
+            NavigationLink(destination: TestCartView2(cartViewModel: cartViewModel)) {
                 MenuButton(imageName: "cart.fill", text: "Cart")
             }
             
             Spacer()
             
-            NavigationLink(destination: HomeNewview()) {
+            NavigationLink(destination: HomeNewview(cartViewModel: cartViewModel)) {
                 MenuButton(imageName: "person.fill", text: "Profile")
             }
             
@@ -79,5 +81,6 @@ struct MenuButton: View {
 
 
 #Preview {
-    MenuBarComponent()
+    MenuBarComponent(cartViewModel: CartViewModel())
+        .environmentObject(CartViewModel())
 }

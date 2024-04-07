@@ -15,6 +15,7 @@ struct HomeNewview: View {
 //    @StateObject var productVM : ProductCategoryDetailViewModel = ProductCategoryDetailViewModel()
     
     @StateObject var productVM : HomeViewModel = HomeViewModel()
+    @ObservedObject var cartViewModel: CartViewModel
     
     @State var navigate : Bool = false
     
@@ -81,7 +82,7 @@ struct HomeNewview: View {
                             
                             Spacer()
                         }
-                        CategoriesSection2()
+                        CategoriesSection2(cartViewModel: cartViewModel)
                     }
                     //.frame(width: 350, height : 300)
                     .padding(.top, 10.0)
@@ -127,7 +128,7 @@ struct HomeNewview: View {
                     .navigationBarTitleDisplayMode(.inline)
                     .background(
                         NavigationLink(
-                            destination: ProductDetailView(selectedProduct: selectedProduct),
+                            destination: ProductDetailView(cartViewModel: cartViewModel,selectedProduct: selectedProduct),
                             isActive: $navigate,
                             label: { EmptyView() }
                         )
@@ -135,7 +136,7 @@ struct HomeNewview: View {
                 }
                 
                 
-                MenuBar()
+                MenuBar(cartViewModel: cartViewModel)
             }
         }
        }
@@ -227,5 +228,5 @@ struct HomeNewview: View {
 
 
 #Preview {
-    HomeNewview()
+    HomeNewview(cartViewModel: CartViewModel())
 }

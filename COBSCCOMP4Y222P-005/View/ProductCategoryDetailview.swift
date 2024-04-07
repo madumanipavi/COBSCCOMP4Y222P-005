@@ -14,6 +14,7 @@ struct ProductCategoryDetailview: View {
  //   @StateObject var subcategoryproductVM : ProductCategoryDetailViewModel = ProductCategoryDetailViewModel()
     
     @StateObject var productVM : ProductCategoryDetailViewModel = ProductCategoryDetailViewModel(for: "Dresses")
+    @ObservedObject var cartViewModel: CartViewModel
     
     @State var navigate : Bool = false
     
@@ -84,13 +85,13 @@ struct ProductCategoryDetailview: View {
                     .navigationBarTitleDisplayMode(.inline)
                     .background(
                         NavigationLink(
-                            destination: ProductDetailView(selectedProduct: selectedProduct),
+                            destination: ProductDetailView(cartViewModel: cartViewModel,selectedProduct: selectedProduct),
                             isActive: $navigate,
                             label: { EmptyView() }
                         )
                     )
                 }
-                MenuBar()
+                MenuBar(cartViewModel: cartViewModel)
             }
         }
         .navigationBarHidden(true)
@@ -292,5 +293,5 @@ struct ProductBox: View {
  */
 
 #Preview {
-    ProductCategoryDetailview()
+    ProductCategoryDetailview(cartViewModel: CartViewModel())
 }

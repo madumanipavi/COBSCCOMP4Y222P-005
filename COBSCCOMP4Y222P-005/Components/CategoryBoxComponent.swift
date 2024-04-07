@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct CategoryBoxComponent: View {
+    @ObservedObject var cartViewModel: CartViewModel
     var body: some View {
-        CategoriesSection2()
+        CategoriesSection2(cartViewModel: cartViewModel)
     }
 }
 
 struct CategoriesSection2 : View {
+    @ObservedObject var cartViewModel: CartViewModel
     var body: some View {
         VStack(alignment: .leading, spacing: 10){
             HStack{
@@ -25,13 +27,13 @@ struct CategoriesSection2 : View {
                 
             ScrollView(.horizontal, showsIndicators: false){
                 HStack(spacing: 10) {
-                    CategoryBox2(imageName: "woman", categoryName: "Women", destination: AnyView(ProductCategoryDetailview()))
+                    CategoryBox2(imageName: "woman", categoryName: "Women", destination: AnyView(ProductCategoryDetailview(cartViewModel: cartViewModel)), cartViewModel: cartViewModel)
                     
-                    CategoryBox2(imageName: "men", categoryName: "Men", destination: AnyView(ProductCategoryDetailview()))
+                    CategoryBox2(imageName: "men", categoryName: "Men", destination: AnyView(ProductCategoryDetailview(cartViewModel: cartViewModel)), cartViewModel: cartViewModel)
                     
-                    CategoryBox2(imageName: "kids", categoryName: "Kids", destination: AnyView(ProductCategoryDetailview()))
+                    CategoryBox2(imageName: "kids", categoryName: "Kids", destination: AnyView(ProductCategoryDetailview(cartViewModel: cartViewModel)), cartViewModel: cartViewModel)
                     
-                    CategoryBox2(imageName: "other", categoryName: "Other", destination: AnyView(ProductCategoryDetailview()))
+                    CategoryBox2(imageName: "other", categoryName: "Other", destination: AnyView(ProductCategoryDetailview(cartViewModel: cartViewModel)), cartViewModel: cartViewModel)
 
                 }
                 .padding()
@@ -52,7 +54,7 @@ struct CategoryBox2 : View {
     var imageName: String
     var categoryName: String
     var destination: AnyView
-    
+    @ObservedObject var cartViewModel: CartViewModel 
     
     var body: some View {
         NavigationLink(destination: destination){
@@ -73,9 +75,11 @@ struct CategoryBox2 : View {
                        .cornerRadius(10)
                       // .shadow(radius: 5)
         }
+        .environmentObject(cartViewModel)
     }
 }
 
 #Preview {
-    CategoryBoxComponent()
+    CategoryBoxComponent(cartViewModel: CartViewModel())
+        .environmentObject(CartViewModel())
 }
