@@ -8,19 +8,30 @@
 import SwiftUI
 import URLImage
 
+
+
+
 struct ProductDetailView: View {
     
     
     @State private var quantity: Int = 1
-    @State private var selectedSize: String = "M"
+//    @State private var selectedSize: String = "M"
+//    
+//    @State private var selectedColor: String = "Blue"
     
-    @State private var selectedColor: String = "Blue"
+    @State private var selectedSize: String = ""
+    
+    @State private var selectedColor: String = ""
+    
     @State public var  pricePerItem: Float = 0
     
     @State public var  pricePerItems: String = ""
     
+    @State private var sizeSelected: Bool = false
+        @State private var colorSelected: Bool = false
+    
  
-    let sizes = ["S", "M" , "L", "XL"]
+  let sizes = ["S", "M" , "L", "XL"]
     let colors: [(name: String, color:Color)] = [("Blue", .blue), ("Red", .red), ("Green", .green), ("Yellow", .yellow)]
     
 //    var  priceProduct: Double {
@@ -216,22 +227,42 @@ struct ProductDetailView: View {
                                 .foregroundColor(.black)
                             
                             
-                            HStack(spacing: 16) {
-                                ForEach(sizes, id: \.self) { size in
-                                    
-                                    Button(action: {
-                                        selectedSize = size
-                                    }) {
-                                        Text(size)
-                                            .foregroundColor(selectedSize == size ? Color.white : Color.black)
-                                            .padding(.vertical, 8)
-                                            .padding(.horizontal, 16)
-                                            .background(selectedSize == size ? Color.blue : Color.gray)
-                                            .cornerRadius(20)
-                                    }
-                                }
-                            }
-    
+//                            HStack(spacing: 16) {
+//                                ForEach(sizes, id: \.self) { size in
+//                                    
+//                                    Button(action: {
+//                                        selectedSize = size
+//                                    }) {
+//                                        Text(size)
+//                                            .foregroundColor(selectedSize == size ? Color.white : Color.black)
+//                                            .padding(.vertical, 8)
+//                                            .padding(.horizontal, 16)
+//                                            .background(selectedSize == size ? Color.blue : Color.gray)
+//                                            .cornerRadius(20)
+//                                    }
+//                                }
+//                            }
+                            
+                            if let sizes = selectedProduct?.availablesize {
+                                               ScrollView(.horizontal, showsIndicators: false) {
+                                                   HStack(spacing: 16) {
+                                                       ForEach(sizes, id: \.self) { size in
+                                                           Button(action: {
+                                                               selectedSize = size
+                                                               sizeSelected = true
+                                                           }) {
+                                                               Text(size)
+                                                                   .foregroundColor(selectedSize == size ? .white : .black)
+                                                                   .padding(.vertical, 8)
+                                                                   .padding(.horizontal, 16)
+                                                                   .background(selectedSize == size ? Color.blue : Color.gray)
+                                                                   .cornerRadius(20)
+                                                           }
+                                                       }
+                                                   }
+                                               }
+                                           }
+                         
                         }
                         
                         Divider()
@@ -244,20 +275,66 @@ struct ProductDetailView: View {
                                 .bold()
                                 .foregroundColor(.black)
                             
-                            HStack(spacing: 16) {
-                                ForEach(colors, id: \.name) {color in
-                                    Button(action: {
-                                        selectedColor = color.name
-                                    }){
-                                        VStack {
-                                            Circle()
-                                                .foregroundColor(color.color)
-                                                .frame(width:32, height:32)
-                                                .foregroundColor(selectedColor == color.name ? Color.white : Color.black)
-                                        }
-                                    }
-                                }
-                            }
+//                            HStack(spacing: 16) {
+//                                ForEach(colors, id: \.name) {color in
+//                                    Button(action: {
+//                                        selectedColor = color.name
+//                                    }){
+//                                        VStack {
+//                                            Circle()
+//                                                .foregroundColor(color.color)
+//                                                .frame(width:32, height:32)
+//                                                .foregroundColor(selectedColor == color.name ? Color.white : Color.black)
+//                                        }
+//                                    }
+//                                }
+//                            }
+                      
+                            
+//
+                            
+//                            if let colors = selectedProduct?.availablecolor {
+//                                 ScrollView(.horizontal, showsIndicators: false) {
+//                                     HStack(spacing: 16) {
+//                                         ForEach(colors, id: \.self) { colorName in
+//                                             let uppercaseColorName = colorName.uppercased() // Convert color name to uppercase
+//                                             let color = Color(uppercaseColorName) // Create Color object using uppercase color name
+//                                             Button(action: {
+//                                                 selectedColor = colorName
+//                                             }) {
+//                                                 Circle()
+//                                                     .foregroundColor(color)
+//                                                     .frame(width:32, height:32)
+//                                                     .foregroundColor(selectedColor == colorName ? .white : .black)
+//                                             }
+//                                         }
+//                                     }
+//                                 }
+//                             }
+                            
+                            
+                            if let colors = selectedProduct?.availablecolor{
+                                               ScrollView(.horizontal, showsIndicators: false) {
+                                                   HStack(spacing: 16) {
+                                                       ForEach(colors, id: \.self) { colorName in
+                                                           Button(action: {
+                                                               selectedColor = colorName
+                                                               colorSelected = true
+                                                           }) {
+                                                               Text(colorName)
+                                                                   .foregroundColor(selectedColor == colorName ? .white : .black)
+                                                                   .padding(.vertical, 8)
+                                                                   .padding(.horizontal, 16)
+                                                                   .background(selectedColor  == colorName ? Color.blue : Color.gray)
+                                                                   .cornerRadius(20)
+                                                           }
+                                                       }
+                                                   }
+                                               }
+                                           }
+                           
+                            
+                            
                         }
                         
                         Divider()
@@ -343,11 +420,25 @@ struct ProductDetailView: View {
             
         }
         .navigationBarHidden(true)
+        .onChange(of: selectedSize, perform: { _ in
+                        if sizeSelected {
+                            // Logic to handle size selection
+                            sizeSelected = false
+                        }
+                    })
+                    .onChange(of: selectedColor, perform: { _ in
+                        if colorSelected {
+                            // Logic to handle color selection
+                            colorSelected = false
+                        }
+                    })
         
     }
    
     
 }
+
+
 
 //struct PopularProductsSection2: View {
 //    var body: some View {
